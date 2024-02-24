@@ -109,14 +109,14 @@
 
 .login-button button {
     border: none;
-    background-color: rgb(235, 153, 47);
+    background-color: #ba332e;
     padding: 0.4rem 1rem;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .login-button button:hover {
-    background-color: rgb(255, 158, 47);
+    background-color: #701c19e8;
 }
 
 .login-button button {
@@ -127,7 +127,7 @@
 
 .login-button a {
   border: none;
-  background-color: rgb(235, 153, 47);
+  background-color: #ba332e;
   padding: 0.4rem 1rem;
   border-radius: 5px;
     
@@ -145,7 +145,7 @@
 
 
 .login-button a:hover {
-  background-color: rgb(255, 158, 47);
+  background-color: #701c19e8;
 }
 
 .login-button a {
@@ -161,7 +161,7 @@
   display: block;
   width: 5rem;
   height: 0.3rem;
-  background-color: rgb(12, 91, 194);
+  background-color: #ba332e;
   margin: 0 auto;
   position: absolute;
   border-radius: 10px;
@@ -197,7 +197,7 @@
 }
 
 .input-box input:focus-visible {
-    outline: 1px solid rgb(255, 168, 68);
+    outline: 1px solid #ba332e;
 }
 
 .input-box label,
@@ -225,7 +225,7 @@
 
  .select select:focus-visible{
 
-    outline: 1px solid rgba(255, 168, 68,1);
+    outline: 1px solid #ba332e;
  }
 
 /*

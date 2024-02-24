@@ -12,7 +12,7 @@ class TemplateSelectForm(forms.Form):
 class UploadFileForm(forms.Form):
     name = forms.CharField(max_length=200)
     file = forms.FileField()
-    ano_vigencia = forms.ChoiceField(choices=[("", "Escolha um Ano")] + YEAR_CHOICES)
+    ano_vigencia = forms.ChoiceField(choices=[("", "----------")] + YEAR_CHOICES)
 
 
 # class Admissao(forms.ModelForm):
@@ -65,3 +65,10 @@ class AdmissaoForm(forms.ModelForm):
     class Meta:
         model = Contrato
         fields = "__all__"
+        widgets = {
+            "data_de_recebimento_da_oferta": forms.DateInput(attrs={"type": "date"}),
+            "data_de_inicio_contrato": forms.DateInput(attrs={"type": "date"}),
+            "data_do_fim_contrato": forms.DateInput(attrs={"type": "date"}),
+            "cambio_data": forms.DateInput(attrs={"type": "date"}),
+            "data_de_assinatura": forms.DateInput(attrs={"type": "date"}),
+        }

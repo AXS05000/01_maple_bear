@@ -1,9 +1,12 @@
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Contrato, Templates
 from django.db.models import Q
-from .forms import TemplateSelectForm, UploadFileForm
+from .forms import UploadFileForm, AdmissaoForm
 from django.http import HttpResponseRedirect
+from django.contrib import messages
+from django.urls import reverse_lazy
 
 
 class ContratoSearchView(ListView):
@@ -47,9 +50,6 @@ class ContratoSearchView(ListView):
         return Contrato.objects.all().order_by(order_by)
 
 
-from django.contrib import messages  # Importar para enviar mensagens
-
-
 def upload_template(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -66,3 +66,70 @@ def upload_template(request):
     else:
         form = UploadFileForm()
     return render(request, "admissao/upload.html", {"form": form})
+
+
+# class FormCandidatoCreateView(CreateView):
+#     model = Contrato
+#     form_class = AdmissaoForm
+#     template_name = "admissao/formulario_candidato.html"
+#     success_url = reverse_lazy("form_candidato")
+
+#     def form_valid(self, form):
+#         form.instance.created_by = self.request.user
+#         return super().form_valid(form)
+
+#     def form_invalid(self, form):
+#         for field, errors in form.errors.items():
+#             for error in errors:
+#                 messages.error(
+#                     self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+#                 )
+#         return super().form_invalid(form)
+
+
+class FormCandidatoCreateView(CreateView):
+    model = Contrato
+    form_class = AdmissaoForm
+    template_name = "admissao/formulario_candidato.html"  # substitua com o seu template
+    success_url = reverse_lazy(
+        "form_candidato"
+    )  # substitua com a URL que você quer redirecionar após o sucesso
+
+    def form_valid(self, form):
+        cpf = form.cleaned_data.get("cpf")
+        collaborator = Contrato.objects.filter(cpf=cpf).first()
+
+        if collaborator:
+            # Atualizar o objeto existente
+            for field, value in form.cleaned_data.items():
+                if (
+                    value is not None
+                    and hasattr(collaborator, field)
+                    and field != "created_by"
+                ):
+                    setattr(collaborator, field, value)
+            collaborator.save()
+            self.object = collaborator
+        else:
+            # Criar um novo objeto
+            if self.request.user.is_authenticated:
+                form.instance.created_by = self.request.user
+            self.object = form.save()
+        return HttpResponseRedirect(self.get_success_url())
+
+    def validate_cpf(value):
+        if len(value) != 11 or not value.isdigit():
+            return False
+        cpf = [int(char) for char in value]
+        if cpf == cpf[::-1]:
+            return False
+        for i in range(9):
+            val = sum((cpf[num] * ((10 - i) % 11)) for num in range(0, 10))
+            digit = ((val * 10) % 11) % 10
+            if digit != cpf[9]:
+                return False
+        val = sum((cpf[num] * ((11 - i) % 11)) for num in range(0, 11))
+        digit = ((val * 10) % 11) % 10
+        if digit != cpf[10]:
+            return False
+        return True

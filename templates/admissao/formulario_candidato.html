@@ -10,7 +10,7 @@
     <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
-    <title>GO2B BI</title>
+    <title>Maple Bear</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
     <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'assets/img/go2b-bi.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
   </head>
   
   <body>
@@ -33,56 +33,48 @@
     <header id="slider-area">  
       <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
         <div class="container">  
-          <a class="navbar-brand" href="{% url 'index' %}"><img class="brand-logo" src="{% static 'assets/img/go2b-bi.png' %}" alt="" style="max-height: 25px;">  GO2B-BI</a>
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto w-100 justify-content-end">
               <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Serviços</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Trabalhos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Equipe</a>
+                <a class="nav-link page-scroll" href="#slider-area">Home</a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notas</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="{% url 'gerar-csv' %}">Notas Fiscais</a>
-                    <a class="nav-link" href="{% url 'notasficais' %}">Notas Portal</a>
-                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
-                </div>
+                  <a class="nav-link" href="">Notas Fiscais</a>
+                  <a class="nav-link" href="">Notas Portal</a>
+                  <a class="nav-link" href="">Emitir OS</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="nav-link" href="">Cadastrar CNPJ</a>
+                  <a class="nav-link" href="">Cadastrar Valor Hora</a>
+                  <a class="nav-link" href="">Importar CNPJ</a>
+                  <a class="nav-link" href="">Importar Notas</a>
+              </div>
               </li>                             
               <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admissão</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="nav-link" href="{% url 'admissao' %}">Form Admissão</a>
-                      <a class="nav-link" href="{% url 'search_collaborator' %}">Painel RH</a>
-                      {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                      {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                      <a class="nav-link" href="">Gestão de Contrados</a>
+                      <a class="nav-link" href="">Emissão de Contrato</a>
                   </div>
               </li>
-              {% if user.is_super_user %}
-              {% else %}
               <li class="nav-item dropdown">
                 <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="{% url 'upload_template' %}">Importar Word</a>
-                    <a class="nav-link" href="{% url 'upload_excel' %}">Importar Mala</a>
-                    <a class="nav-link" href="{% url 'upload_excel_folha' %}">Importar Folha</a>
-                    <a class="nav-link" href="{% url 'upload_excel_beneficio' %}">Importar Beneficio</a>
+                    <a class="nav-link" href="">Importar Word</a>
+                    <a class="nav-link" href="">Importar Mala</a>
+                    <a class="nav-link" href="">Importar Folha</a>
+                    <a class="nav-link" href="">Importar Beneficio</a>
+                    <a class="nav-link" href="">Importar CNPJ Notas</a>
+                    <a class="nav-link" href="">Importar Notas</a>
                     {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
                     {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
                 </div>
               </li>
-              {% endif %} 
               {% if user.is_anonymous %}
               {% else %}
               <li class="nav-item">
@@ -93,7 +85,7 @@
             </ul>              
           </div>
         </div>
-      </nav> 
+      </nav>
 
 
     </header>
@@ -104,8 +96,8 @@
     <section id="admissao" class="section">
       <div class="container">
         <div class="section-header">          
-          <h2 class="section-title">PREENCHA SUAS INFORMAÇÕES:</h2>
-          <span>ADMISSÃO</span>
+          <h2 class="section-title">CRIAÇÃO PCF:</h2>
+          <span>MAPLE BEAR</span>
         </div>
         <div class="row">
 
@@ -170,62 +162,74 @@
                   <div class="input-box">
                       <div class="select">
                           <div id="camposAdicionais" class="select produto-quantidade">
-                              <div class="form-contratos" id="produto1">
-                                  <div class="comp-nota-1">Nome:</div>
-                                  <div class="comp-nota-1">{{ form.name }}</div>
-                              </div>
-                              <div class="form-contratos" id="produto8">
+                            <div class="form-contratos">
+                                <div class="comp-nota-1">Nome:</div>
+                                <div class="comp-nota-1">{{ form.nome }}</div>
+                            </div>
+                            <div class="form-contratos">
                                 <div class="comp-nota-1">E-mail:</div>
                                 <div class="comp-nota-1">{{ form.email }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida7">
-                                <div class="tipo-de-faturamento-1">Celular:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.celular|addattrs:"id=celular" }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida1">
-                                  <div class="tipo-de-faturamento-1">CPF:</div>
-                                  <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida2">
-                                  <div class="tipo-de-faturamento-1">RG:</div>
-                                  <div class="tipo-de-faturamento-1">{{ form.rg }}</div>
-                              </div>
-                              <div class="form-contratos" id="produto3">
-                                  <div class="comp-nota-1">Orgão Emissor RG:</div>
-                                  <div class="comp-nota-1">{{ form.orgao_emissor_rg }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida3">
-                                  <div class="tipo-de-faturamento-1">UF RG:</div>
-                                  <div class="tipo-de-faturamento-1">{{ form.uf_rg }}</div>
-                              </div>
-                              <div class="form-contratos" id="produto4">
-                                  <div class="comp-nota-1">Data Emissão RG:</div>
-                                  <div class="comp-nota-1">{{ form.data_emissao_rg }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida4">
-                                  <div class="tipo-de-faturamento-1">N° CTPS:</div>
-                                  <div class="tipo-de-faturamento-1">{{ form.n_ctps }}</div>
-                              </div>
-                              <div class="form-contratos" id="Serie CTPS">
-                                  <div class="comp-nota-1">Serie CTPS:</div>
-                                  <div class="comp-nota-1">{{ form.serie }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida5">
-                                  <div class="tipo-de-faturamento-1">UF CTPS:</div>
-                                  <div class="tipo-de-faturamento-1">{{ form.uf_ctps }}</div>
-                              </div>
-                              <div class="form-contratos" id="produto6">
-                                  <div class="comp-nota-1">Data Emissão CTPS:</div>
-                                  <div class="comp-nota-1">{{ form.data_emissao_ctps }}</div>
-                              </div>
-                              <div class="form-contratos" id="produto7">
-                                  <div class="comp-nota-1">CEP:</div>
-                                  <div class="comp-nota-1">{{ form.cep|addattrs:"id=cep" }}</div>
-                              </div>
-                              <div class="tipo-de-faturamento" id="quantidade_vendida6">
-                                <div class="tipo-de-faturamento-1">Endereço:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.endereco }}</div>
-                              </div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">CPF:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">RG:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.rg }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Nacionalidade:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.nascionalidade }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Estado Civil:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.estado_civil }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Data de Recebimento da Oferta:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_recebimento_da_oferta }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">UF Pretendido:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.uf_pretendido }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Cidade Pretendida:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="dias_vigencia">
+                                <div class="tipo-de-faturamento-1">Dias de Vigência:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.dias_vigencia }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_de_inicio_contrato">
+                                <div class="tipo-de-faturamento-1">Data de Inicio Contrato:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_inicio_contrato }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_do_fim_contrato">
+                                <div class="tipo-de-faturamento-1">Data do Fim do Contrato:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_do_fim_contrato }}</div>
+                            </div>
+                            <div class="form-contratos" id="taxa_inicial_franquia">
+                                <div class="comp-nota-1">Taxa Inicial da Franquia:</div>
+                                <div class="comp-nota-1">{{ form.taxa_inicial_franquia }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="cambio_valor">
+                                <div class="tipo-de-faturamento-1">Valor do Câmbio:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cambio_valor }}</div>
+                            </div>
+                            <div class="form-contratos" id="cambio_data">
+                                <div class="comp-nota-1">Data do Câmbio:</div>
+                                <div class="comp-nota-1">{{ form.cambio_data }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_de_assinatura">
+                                <div class="tipo-de-faturamento-1">Data de Assinatura:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_assinatura }}</div>
+                            </div>
+                            <div class="form-contratos" id="outros">
+                                <div class="comp-nota-1">Outros Detalhes:</div>
+                                <div class="comp-nota-1">{{ form.outros }}</div>
+                            </div>
 
                           </div>
 
@@ -261,38 +265,6 @@
 
 
     
-      <!-- Copyright Start  -->
-      <div id="copyright">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="site-info float-left">
-                <p>Crafted by <a href="http://uideck.com" rel="nofollow">UIdeck</a></p>
-              </div>              
-              <div class="float-right">  
-                <ul class="nav nav-inline">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">About Prime</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">TOS</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Return Policy</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">FAQ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Copyright End -->
 
     </footer>
     <!-- Footer Section End --> 
