@@ -8,12 +8,12 @@
     --bs-pagination-border-radius: 0.375rem;
     --bs-pagination-hover-bg: #f0f2f5;
     --bs-pagination-hover-border-color: #dee2e6;
-    --bs-pagination-focus-color: #ffad31;
+    --bs-pagination-focus-color: #ba332e;
     --bs-pagination-focus-bg: #f0f2f5;
     --bs-pagination-focus-box-shadow: 0 0 0 0.2rem rgba(253, 163, 60, 0.25);
     --bs-pagination-active-color: #fff;
-    --bs-pagination-active-bg: #ffb135;
-    --bs-pagination-active-border-color: #ffb135;
+    --bs-pagination-active-bg: #ba332e;
+    --bs-pagination-active-border-color: #ba332e;
     --bs-pagination-disabled-color: #6c757d;
     --bs-pagination-disabled-bg: #fff;
     --bs-pagination-disabled-border-color: #dee2e6;
