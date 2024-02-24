@@ -66,7 +66,7 @@ MARITAL_STATUS_CHOICES = [
 class Templates(Base):
     name = models.CharField(max_length=200)
     file = models.FileField(upload_to="contract_templates/")
-    ano_vigencia = models.CharField(max_length=200)
+    ano_vigencia = models.CharField(max_length=4, choices=YEAR_CHOICES)
 
     def __str__(self):
         return f"{self.name}"

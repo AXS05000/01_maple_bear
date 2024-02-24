@@ -1,7 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
 from validate_docbr import CPF
-
+from .models import YEAR_CHOICES
 from .models import Base, Contrato, Templates
 
 
@@ -12,7 +12,7 @@ class TemplateSelectForm(forms.Form):
 class UploadFileForm(forms.Form):
     name = forms.CharField(max_length=200)
     file = forms.FileField()
-    ano_vigencia = forms.CharField(max_length=200)
+    ano_vigencia = forms.ChoiceField(choices=[("", "Escolha um Ano")] + YEAR_CHOICES)
 
 
 # class Admissao(forms.ModelForm):

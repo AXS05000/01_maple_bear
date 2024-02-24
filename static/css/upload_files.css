@@ -245,3 +245,27 @@ input, button, select, textarea {
 .btn-secondary:hover {
     color: #e9e5ff;
 }
+
+
+ .select select:focus-visible{
+
+    outline: 1px solid #ba332e;
+    min-width: 25rem;
+ }
+
+.select select{
+    
+    min-width: 25rem;
+    border: none;
+    border-radius: 10px;
+    box-shadow: 1px 1px 6px #0000001c;
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+
+
+}
+
+
+.select {
+    min-height: 4.3rem;
+}
