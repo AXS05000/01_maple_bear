@@ -153,39 +153,27 @@ class CandidatoUpdateView(UpdateView):
 
 
 def generate_contract(template, contrato):
-    # Load the Word document
     doc = Document(template.file.path)
+    replacements = contrato.get_field_values()
 
-    # Prepare the replacement dictionary combining values from all models
-    replacements = {}
-    replacements.update(contrato.get_field_values())
-
-    # Loop through each paragraph
     for paragraph in doc.paragraphs:
-        # Replace the keys in the entire paragraph text, not just the runs
-        inline = paragraph.runs
         for key, value in replacements.items():
-            if key in paragraph.text:
-                text = paragraph.text.replace(key, value)
-                for i in range(len(inline)):
-                    if key in inline[i].text:
-                        text = inline[i].text.replace(key, value)
-                        inline[i].text = text
+            if key in paragraph.text:  # Verifica se a chave está no parágrafo
+                for run in paragraph.runs:
+                    run.text = run.text.replace(key, value)  # Substitui no run
 
-    # Make sure the contracts directory exists
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
     os.makedirs(contract_directory, exist_ok=True)
 
-    # Save the new Word document
     new_contract_filename = os.path.join(
         contract_directory, f"{contrato.nome}_{template.name}.docx"
     )
     doc.save(new_contract_filename)
 
-    # Convert the Word document to PDF
     new_contract_pdf_filename = os.path.join(
         contract_directory, f"{contrato.nome}_{template.name}.pdf"
     )
+
     p = Popen(
         [
             "libreoffice",
@@ -197,11 +185,8 @@ def generate_contract(template, contrato):
             contract_directory,
         ]
     )
-    # print("Waiting for conversion...")
     p.wait()
-    # print("Conversion finished.")
 
-    # Delete the Word document
     os.remove(new_contract_filename)
 
     return new_contract_pdf_filename
