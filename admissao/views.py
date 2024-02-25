@@ -14,6 +14,7 @@ from docx2pdf import convert as convert_docx_to_pdf
 from docx import Document
 from docx2pdf import convert
 from subprocess import Popen
+from docx.shared import Pt
 
 
 class ContratoSearchView(ListView):
@@ -154,22 +155,29 @@ class CandidatoUpdateView(UpdateView):
 
 def generate_contract(template, contrato):
     doc = Document(template.file.path)
-
     replacements = {k: str(v) for k, v in contrato.get_field_values().items()}
 
-    # Substituição em parágrafos
+    # Substituição em parágrafos (mantendo a formatação)
     for paragraph in doc.paragraphs:
         for key, value in replacements.items():
             if key in paragraph.text:
-                paragraph.text = paragraph.text.replace(key, value)
+                for run in paragraph.runs:
+                    if key in run.text:
+                        run.text = run.text.replace(key, value)
+                        run.font.name = "Calibri"
+                        run.font.size = Pt(11)
 
-    # Substituição em tabelas
+    # Substituição em tabelas (mantendo a formatação)
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
-                for key, value in replacements.items():
-                    if key in cell.text:
-                        cell.text = cell.text.replace(key, value)
+                for paragraph in cell.paragraphs:
+                    for run in paragraph.runs:
+                        for key, value in replacements.items():
+                            if key in run.text:
+                                run.text = run.text.replace(key, value)
+                                run.font.name = "Calibri"
+                                run.font.size = Pt(11)
 
     # Make sure the contracts directory exists
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
