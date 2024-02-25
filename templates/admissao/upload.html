@@ -49,19 +49,7 @@
                   <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
                 </div>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="">Importar Word</a>
-                    <a class="nav-link" href="">Importar Mala</a>
-                    <a class="nav-link" href="">Importar Folha</a>
-                    <a class="nav-link" href="">Importar Beneficio</a>
-                    <a class="nav-link" href="">Importar CNPJ Notas</a>
-                    <a class="nav-link" href="">Importar Notas</a>
-                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
-                </div>
-              </li>
+
               {% if user.is_anonymous %}
               {% else %}
               <li class="nav-item">
