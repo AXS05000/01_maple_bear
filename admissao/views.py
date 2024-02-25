@@ -233,7 +233,7 @@ def generate_contract(template, contrato):
 
     # Save the new Word document
     new_contract_filename = os.path.join(
-        contract_directory, f"{contrato.name}_{template.name}.docx"
+        contract_directory, f"{contrato.nome}_{template.name}.docx"
     )
     doc.save(new_contract_filename)
 
