@@ -1,3 +1,5 @@
+import os
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
@@ -7,6 +9,11 @@ from .forms import UploadFileForm, AdmissaoForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.http import FileResponse, HttpResponse, HttpResponseRedirect
+from docx2pdf import convert as convert_docx_to_pdf
+from docx import Document
+from docx2pdf import convert
+from subprocess import Popen
 
 
 class ContratoSearchView(ListView):
@@ -133,3 +140,104 @@ class FormCandidatoCreateView(CreateView):
         if digit != cpf[10]:
             return False
         return True
+
+
+class CandidatoUpdateView(UpdateView):
+    model = Contrato
+    template_name = "admissao/formulario_candidato_edit.html"
+    fields = "__all__"
+    success_url = reverse_lazy("busca_candidato")
+
+
+####################GERAÇÃO DO CONTRATO EM PDF##########################
+
+
+def generate_contract(template, contrato):
+    # Load the Word document
+    doc = Document(template.file.path)
+
+    # Prepare the replacement dictionary combining values from all models
+    replacements = {}
+    replacements.update(contrato.get_field_values())
+
+    # Loop through each paragraph
+    for paragraph in doc.paragraphs:
+        # Replace the keys in the entire paragraph text, not just the runs
+        inline = paragraph.runs
+        for key, value in replacements.items():
+            if key in paragraph.text:
+                text = paragraph.text.replace(key, value)
+                for i in range(len(inline)):
+                    if key in inline[i].text:
+                        text = inline[i].text.replace(key, value)
+                        inline[i].text = text
+
+    # Make sure the contracts directory exists
+    contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
+    os.makedirs(contract_directory, exist_ok=True)
+
+    # Save the new Word document
+    new_contract_filename = os.path.join(
+        contract_directory, f"{contrato.nome}_{template.name}.docx"
+    )
+    doc.save(new_contract_filename)
+
+    # Convert the Word document to PDF
+    new_contract_pdf_filename = os.path.join(
+        contract_directory, f"{contrato.nome}_{template.name}.pdf"
+    )
+    p = Popen(
+        [
+            "libreoffice",
+            "--headless",
+            "--convert-to",
+            "pdf",
+            new_contract_filename,
+            "--outdir",
+            contract_directory,
+        ]
+    )
+    # print("Waiting for conversion...")
+    p.wait()
+    # print("Conversion finished.")
+
+    # Delete the Word document
+    os.remove(new_contract_filename)
+
+    return new_contract_pdf_filename
+
+
+def convert_to_pdf(input_filepath, output_filepath):
+    convert(input_filepath, output_filepath)
+
+
+def select_contract_id(request, pk):  # Altere 'contrato_id' para 'pk'
+    if request.method == "POST":
+        template_id = request.POST.get("template")
+
+        contrato = Contrato.objects.get(pk=pk)  # Use 'pk' aqui também
+        template = Templates.objects.get(id=template_id)
+
+        contract_filename = generate_contract(template, contrato)
+
+        # Vamos obter apenas o nome do arquivo sem o caminho
+        filename = os.path.basename(contract_filename)
+
+        # Retornamos o arquivo como anexo, definindo o nome do arquivo no cabeçalho 'Content-Disposition'
+        return FileResponse(
+            open(contract_filename, "rb"),
+            as_attachment=True,
+            filename=filename,
+            content_type="application/pdf",
+        )
+
+    # Agora, se o request não for POST, o colaborador será buscado pelo parâmetro na URL:
+    else:
+        contrato = Contrato.objects.get(pk=pk)
+        templates = Templates.objects.all()
+
+        return render(
+            request,
+            "admissao/select_contract_id.html",
+            {"contrato": contrato, "templates": templates},
+        )

@@ -39,27 +39,15 @@
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto w-100 justify-content-end">
               <li class="nav-item">
-                <a class="nav-link page-scroll" href="#slider-area">Home</a>
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notas</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <a class="nav-link" href="">Notas Fiscais</a>
-                  <a class="nav-link" href="">Notas Portal</a>
-                  <a class="nav-link" href="">Emitir OS</a>
-                  <div class="dropdown-divider"></div>
-                  <a class="nav-link" href="">Cadastrar CNPJ</a>
-                  <a class="nav-link" href="">Cadastrar Valor Hora</a>
-                  <a class="nav-link" href="">Importar CNPJ</a>
-                  <a class="nav-link" href="">Importar Notas</a>
-              </div>
-              </li>                             
-              <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
-                      <a class="nav-link" href="">Gestão de Contrados</a>
-                      <a class="nav-link" href="">Emissão de Contrato</a>
-                  </div>
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" href="#slider-area" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
+                  <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
+                  <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
+                </div>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
@@ -263,39 +251,6 @@
 
 
 
-    
-      <!-- Copyright Start  -->
-      <div id="copyright">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="site-info float-left">
-                <p>Crafted by <a href="http://uideck.com" rel="nofollow">UIdeck</a></p>
-              </div>              
-              <div class="float-right">  
-                <ul class="nav nav-inline">
-                  <li class="nav-item">
-                    <a class="nav-link active" href="#">About Prime</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">TOS</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Return Policy</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">FAQ</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                  </li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Copyright End -->
 
     </footer>
     <!-- Footer Section End --> 

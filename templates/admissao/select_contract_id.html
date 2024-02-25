@@ -9,7 +9,7 @@
     <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="author" content="Grayrids">
-    <title>GO2B BI</title>
+    <title>Maple Bear</title>
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
     <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
-    <link rel="icon" type="image/png" href="{% static 'assets/img/go2b-bi.png' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
   </head>
   
   <body>
@@ -32,56 +32,40 @@
     <header id="slider-area">  
       <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
         <div class="container">  
-          <a class="navbar-brand" href="{% url 'index' %}"><img class="brand-logo" src="{% static 'assets/img/go2b-bi.png' %}" alt="" style="max-height: 25px;">  GO2B-BI</a>
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
           </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Serviços</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Trabalhos</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link page-scroll" href="{% url 'index' %}">Equipe</a>
-              </li>
+              
               <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Notas</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="{% url 'gerar-csv' %}">Notas Fiscais</a>
-                    <a class="nav-link" href="{% url 'notasficais' %}">Notas Portal</a>
-                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" href="#slider-area" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
+                  <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
+                  <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
                 </div>
-              </li>                             
-              <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admissão</a>
-                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="nav-link" href="{% url 'admissao' %}">Form Admissão</a>
-                      <a class="nav-link" href="{% url 'search_collaborator' %}">Painel RH</a>
-                      {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                      {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
-                  </div>
               </li>
-              {% if user.is_super_user %}
-              {% else %}
+
+
               <li class="nav-item dropdown">
                 <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="{% url 'upload_template' %}">Importar Word</a>
-                    <a class="nav-link" href="{% url 'upload_excel' %}">Importar Mala</a>
-                    <a class="nav-link" href="{% url 'upload_excel_folha' %}">Importar Folha</a>
-                    <a class="nav-link" href="{% url 'upload_excel_beneficio' %}">Importar Beneficio</a>
+                    <a class="nav-link" href="">Importar Word</a>
+                    <a class="nav-link" href="">Importar Mala</a>
+                    <a class="nav-link" href="">Importar Folha</a>
+                    <a class="nav-link" href="">Importar Beneficio</a>
+                    <a class="nav-link" href="">Importar CNPJ Notas</a>
+                    <a class="nav-link" href="">Importar Notas</a>
                     {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
                     {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
                 </div>
               </li>
-              {% endif %} 
               {% if user.is_anonymous %}
               {% else %}
               <li class="nav-item">
@@ -92,7 +76,7 @@
             </ul>              
           </div>
         </div>
-      </nav> 
+      </nav>  
 
 
     </header>

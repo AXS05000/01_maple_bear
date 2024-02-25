@@ -124,7 +124,7 @@
               {% for contrato in object_list %}
                 <tr>
                   <td>
-                    <a href="#">{{ contrato.nome }}</a>
+                    <a href="{% url 'edit_candidato' contrato.id %}">{{ contrato.nome }}</a>
                   </td>
                   <td>
                     <p>{{ contrato.cpf }}</p>
