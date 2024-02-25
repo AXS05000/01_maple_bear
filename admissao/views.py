@@ -158,9 +158,9 @@ def generate_contract(template, contrato):
 
     for paragraph in doc.paragraphs:
         for key, value in replacements.items():
-            if key in paragraph.text:  # Verifica se a chave está no parágrafo
+            if key in paragraph.text:
                 for run in paragraph.runs:
-                    run.text = run.text.replace(key, value)  # Substitui no run
+                    run.text = run.text.replace(key, value)
 
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
     os.makedirs(contract_directory, exist_ok=True)
@@ -170,10 +170,10 @@ def generate_contract(template, contrato):
     )
     doc.save(new_contract_filename)
 
+    # Convert the Word document to PDF
     new_contract_pdf_filename = os.path.join(
         contract_directory, f"{contrato.nome}_{template.name}.pdf"
     )
-
     p = Popen(
         [
             "libreoffice",
@@ -185,8 +185,11 @@ def generate_contract(template, contrato):
             contract_directory,
         ]
     )
+    # print("Waiting for conversion...")
     p.wait()
+    # print("Conversion finished.")
 
+    # Delete the Word document
     os.remove(new_contract_filename)
 
     return new_contract_pdf_filename
