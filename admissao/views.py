@@ -14,7 +14,6 @@ from docx2pdf import convert as convert_docx_to_pdf
 from docx import Document
 from docx2pdf import convert
 from subprocess import Popen
-from docx.shared import Pt
 
 
 class ContratoSearchView(ListView):
@@ -153,31 +152,41 @@ class CandidatoUpdateView(UpdateView):
 ####################GERAÇÃO DO CONTRATO EM PDF##########################
 
 
+from docx.shared import Pt
+
+
+def set_run_text(run, text):
+    run.text = text
+    run.font.name = "Calibri"
+    run.font.size = Pt(11)
+
+
 def generate_contract(template, contrato):
     doc = Document(template.file.path)
     replacements = {k: str(v) for k, v in contrato.get_field_values().items()}
 
-    # Substituição em parágrafos (mantendo a formatação)
+    # Substituição nos parágrafos
     for paragraph in doc.paragraphs:
+        full_text = paragraph.text
         for key, value in replacements.items():
-            if key in paragraph.text:
-                for run in paragraph.runs:
-                    if key in run.text:
-                        run.text = run.text.replace(key, value)
-                        run.font.name = "Calibri"
-                        run.font.size = Pt(11)
+            if key in full_text:
+                full_text = full_text.replace(key, value)
+        if full_text != paragraph.text:  # Se houver substituições
+            paragraph.clear()
+            set_run_text(paragraph.add_run(), full_text)
 
-    # Substituição em tabelas (mantendo a formatação)
+    # Substituição nas tabelas
     for table in doc.tables:
         for row in table.rows:
             for cell in row.cells:
                 for paragraph in cell.paragraphs:
-                    for run in paragraph.runs:
-                        for key, value in replacements.items():
-                            if key in run.text:
-                                run.text = run.text.replace(key, value)
-                                run.font.name = "Calibri"
-                                run.font.size = Pt(11)
+                    full_text = paragraph.text
+                    for key, value in replacements.items():
+                        if key in full_text:
+                            full_text = full_text.replace(key, value)
+                    if full_text != paragraph.text:  # Se houver substituições
+                        paragraph.clear()
+                        set_run_text(paragraph.add_run(), full_text)
 
     # Make sure the contracts directory exists
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
