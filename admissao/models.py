@@ -122,7 +122,9 @@ class Contrato(Base):
             ),
             "{taxa_inicial_franquia}": self.taxa_inicial_franquia,
             "{cambio_valor}": self.cambio_valor,
-            "{cambio_data}": self.cambio_data,
+            "{cambio_data}": (
+                self.cambio_data.strftime("%d/%m/%Y") if self.cambio_data else ""
+            ),
             "{data_de_assinatura}": (
                 self.data_de_assinatura.strftime("%d/%m/%Y")
                 if self.data_de_assinatura

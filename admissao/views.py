@@ -208,30 +208,27 @@ class CandidatoUpdateView(UpdateView):
 
 
 def generate_contract(template, contrato):
-    # Load the Word document
     doc = Document(template.file.path)
 
-    # Prepare the replacement dictionary combining values from all models
-    replacements = {}
-    replacements.update(contrato.get_field_values())
+    replacements = {k: str(v) for k, v in contrato.get_field_values().items()}
 
-    # Loop through each paragraph
+    # Substituição em parágrafos
     for paragraph in doc.paragraphs:
-        # Replace the keys in the entire paragraph text, not just the runs
-        inline = paragraph.runs
         for key, value in replacements.items():
             if key in paragraph.text:
-                text = paragraph.text.replace(key, value)
-                for i in range(len(inline)):
-                    if key in inline[i].text:
-                        text = inline[i].text.replace(key, value)
-                        inline[i].text = text
+                paragraph.text = paragraph.text.replace(key, value)
 
-    # Make sure the contracts directory exists
+    # Substituição em tabelas
+    for table in doc.tables:
+        for row in table.rows:
+            for cell in row.cells:
+                for key, value in replacements.items():
+                    if key in cell.text:
+                        cell.text = cell.text.replace(key, value)
+
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
     os.makedirs(contract_directory, exist_ok=True)
 
-    # Save the new Word document
     new_contract_filename = os.path.join(
         contract_directory, f"{contrato.nome}_{template.name}.docx"
     )
