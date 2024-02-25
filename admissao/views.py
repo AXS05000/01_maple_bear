@@ -152,47 +152,92 @@ class CandidatoUpdateView(UpdateView):
 ####################GERAÇÃO DO CONTRATO EM PDF##########################
 
 
-def generate_contract(template, contrato):
-    doc = Document(template.file.path)
-    replacements = contrato.get_field_values()
+# def generate_contract(template, contrato):
+#     # Load the Word document
+#     doc = Document(template.file.path)
 
+#     # Prepare the replacement dictionary combining values from all models
+#     replacements = {}
+#     replacements.update(contrato.get_field_values())
+
+#     # Loop through each paragraph
+#     for paragraph in doc.paragraphs:
+#         # Replace the keys in the entire paragraph text, not just the runs
+#         inline = paragraph.runs
+#         for key, value in replacements.items():
+#             if key in paragraph.text:
+#                 text = paragraph.text.replace(key, value)
+#                 for i in range(len(inline)):
+#                     if key in inline[i].text:
+#                         text = inline[i].text.replace(key, value)
+#                         inline[i].text = text
+
+#     # Make sure the contracts directory exists
+#     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
+#     os.makedirs(contract_directory, exist_ok=True)
+
+#     # Save the new Word document
+#     new_contract_filename = os.path.join(
+#         contract_directory, f"{contrato.nome}_{template.name}.docx"
+#     )
+#     doc.save(new_contract_filename)
+
+#     # Convert the Word document to PDF
+#     new_contract_pdf_filename = os.path.join(
+#         contract_directory, f"{contrato.nome}_{template.name}.pdf"
+#     )
+#     p = Popen(
+#         [
+#             "libreoffice",
+#             "--headless",
+#             "--convert-to",
+#             "pdf",
+#             new_contract_filename,
+#             "--outdir",
+#             contract_directory,
+#         ]
+#     )
+#     # print("Waiting for conversion...")
+#     p.wait()
+#     # print("Conversion finished.")
+
+#     # Delete the Word document
+#     os.remove(new_contract_filename)
+
+#     return new_contract_pdf_filename
+
+
+def generate_contract(template, contrato):
+    # Load the Word document
+    doc = Document(template.file.path)
+
+    # Prepare the replacement dictionary combining values from all models
+    replacements = {}
+    replacements.update(contrato.get_field_values())
+
+    # Loop through each paragraph
     for paragraph in doc.paragraphs:
+        # Replace the keys in the entire paragraph text, not just the runs
+        inline = paragraph.runs
         for key, value in replacements.items():
             if key in paragraph.text:
-                for run in paragraph.runs:
-                    run.text = run.text.replace(key, value)
+                text = paragraph.text.replace(key, value)
+                for i in range(len(inline)):
+                    if key in inline[i].text:
+                        text = inline[i].text.replace(key, value)
+                        inline[i].text = text
 
+    # Make sure the contracts directory exists
     contract_directory = os.path.join(settings.MEDIA_ROOT, "contracts")
     os.makedirs(contract_directory, exist_ok=True)
 
+    # Save the new Word document
     new_contract_filename = os.path.join(
-        contract_directory, f"{contrato.nome}_{template.name}.docx"
+        contract_directory, f"{contrato.name}_{template.name}.docx"
     )
     doc.save(new_contract_filename)
 
-    # Convert the Word document to PDF
-    new_contract_pdf_filename = os.path.join(
-        contract_directory, f"{contrato.nome}_{template.name}.pdf"
-    )
-    p = Popen(
-        [
-            "libreoffice",
-            "--headless",
-            "--convert-to",
-            "pdf",
-            new_contract_filename,
-            "--outdir",
-            contract_directory,
-        ]
-    )
-    # print("Waiting for conversion...")
-    p.wait()
-    # print("Conversion finished.")
-
-    # Delete the Word document
-    os.remove(new_contract_filename)
-
-    return new_contract_pdf_filename
+    return new_contract_filename
 
 
 def convert_to_pdf(input_filepath, output_filepath):
