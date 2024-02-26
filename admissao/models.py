@@ -135,6 +135,7 @@ class Contrato(Base):
         total_pagamento_extenso = numero_por_extenso(total_pagamento, 'real')
         taxa_inicial_franquia_formatado = formatar_valor(self.taxa_inicial_franquia)
         cambio_valor_formatado = formatar_valor(self.cambio_valor)
+        cambio_valor_extenso = numero_por_extenso(self.cambio_valor, 'real')
         
         return {
             "{nome}": self.nome,
@@ -167,6 +168,7 @@ class Contrato(Base):
             "{total_a_ser_pago}": total_pagamento_formatado,
             "{total_pagamento_extenso}": total_pagamento_extenso,
             "{cambio_valor}": cambio_valor_formatado,
+            "{cambio_valor_extenso}": cambio_valor_extenso,
             "{cambio_data}": (
                 self.cambio_data.strftime("%d/%m/%Y") if self.cambio_data else ""
             ),
