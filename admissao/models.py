@@ -89,7 +89,14 @@ class Contrato(Base):
     cambio_valor = models.DecimalField(max_digits=25, decimal_places=2)
     cambio_data = models.DateField()
     data_de_assinatura = models.DateField()
-    outros = models.CharField(max_length=15000)
+    outros = models.CharField(max_length=25000)
+    endereco = models.CharField(max_length=550)
+    numero = models.CharField(max_length=250)
+    complemento = models.CharField(max_length=250)
+    bairro = models.CharField(max_length=250)
+    cidade_endereco = models.CharField(max_length=250)
+    uf_endereco = models.CharField(max_length=2, choices=STATE_CHOICES)
+    cep = models.CharField(max_length=9)
 
     def __str__(self):
         return f"{self.nome}"
@@ -131,4 +138,11 @@ class Contrato(Base):
                 else ""
             ),
             "{outros}": self.outros,
+            "{endereco}": self.endereco,
+            "{numero}": self.numero,
+            "{complemento}": self.complemento,
+            "{bairro}": self.bairro,
+            "{cidade_endereco}": self.cidade_endereco,
+            "{uf_endereco}": self.uf_endereco,
+            "{cep}": self.cep,
         }
