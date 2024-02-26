@@ -14,8 +14,12 @@ from docx2pdf import convert as convert_docx_to_pdf
 from docx import Document
 from docx2pdf import convert
 from subprocess import Popen
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+from docx.shared import Pt
 
 
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
 class ContratoSearchView(ListView):
     model = Contrato
     template_name = "admissao/busca_de_candidatos.html"
@@ -57,6 +61,7 @@ class ContratoSearchView(ListView):
         return Contrato.objects.all().order_by(order_by)
 
 
+@login_required(login_url="/login/")
 def upload_template(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
@@ -94,6 +99,7 @@ def upload_template(request):
 #         return super().form_invalid(form)
 
 
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
 class FormCandidatoCreateView(CreateView):
     model = Contrato
     form_class = AdmissaoForm
@@ -142,6 +148,7 @@ class FormCandidatoCreateView(CreateView):
         return True
 
 
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
 class CandidatoUpdateView(UpdateView):
     model = Contrato
     template_name = "admissao/formulario_candidato_edit.html"
@@ -150,9 +157,6 @@ class CandidatoUpdateView(UpdateView):
 
 
 ####################GERAÇÃO DO CONTRATO EM PDF##########################
-
-
-from docx.shared import Pt
 
 
 def set_run_text(run, text):
@@ -257,6 +261,7 @@ def convert_to_pdf(input_filepath, output_filepath):
     convert(input_filepath, output_filepath)
 
 
+@login_required(login_url="/login/")
 def select_contract_id(request, pk):  # Altere 'contrato_id' para 'pk'
     if request.method == "POST":
         template_id = request.POST.get("template")
