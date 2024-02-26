@@ -109,6 +109,7 @@ class Contrato(Base):
         valor_dolar_extenso = num2words(self.taxa_inicial_franquia, lang='pt_BR')
         total_pagamento = self.cambio_valor * self.taxa_inicial_franquia
         total_pagamento_formatado = formatar_valor(total_pagamento)
+        total_pagamento_extenso = num2words(total_pagamento, lang='pt_BR')
         taxa_inicial_franquia_formatado = formatar_valor(self.taxa_inicial_franquia)
         cambio_valor_formatado = formatar_valor(self.cambio_valor)
         return {
@@ -140,6 +141,7 @@ class Contrato(Base):
             "{taxa_inicial_franquia}": taxa_inicial_franquia_formatado,
             "{valor_dolar_extenso}": valor_dolar_extenso,
             "{total_a_ser_pago}": total_pagamento_formatado,
+            "{total_pagamento_extenso}": total_pagamento_extenso,
             "{cambio_valor}": cambio_valor_formatado,
             "{cambio_data}": (
                 self.cambio_data.strftime("%d/%m/%Y") if self.cambio_data else ""
