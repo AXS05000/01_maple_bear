@@ -72,10 +72,12 @@ class Templates(Base):
         return f"{self.name}"
 
 def formatar_valor(valor):
-    # Converte para Decimal para manter precisão e evitar arredondamento indesejado
+    # Converte para Decimal para manter precisão
     valor_decimal = Decimal(valor)
-    # Formata com separadores de milhar e mantém as casas decimais originais
-    valor_formatado = "{:,.{}f}".format(valor_decimal, valor_decimal.as_tuple().exponent * -1).replace(",", "X").replace(".", ",").replace("X", ".")
+    # Determina a quantidade de casas decimais
+    casas_decimais = max(2, abs(valor_decimal.as_tuple().exponent))
+    # Formata sem arredondar, mantendo as casas decimais exatas
+    valor_formatado = "{:,.{}f}".format(valor_decimal, casas_decimais).replace(",", "X").replace(".", ",").replace("X", ".")
     return valor_formatado
 
 def numero_por_extenso(valor, moeda='real'):
