@@ -1,0 +1,336 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="keywords" content="Bootstrap, Landing page, Template, Registration, Landing">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="author" content="Grayrids">
+    <title>Maple Bear</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{% static 'assets_2/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/line-icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/nivo-lightbox.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/color-switcher.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/menu_sideslide.css' %}">
+    <link rel="stylesheet" href="{% static 'assets_2/css/main.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
+    <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
+    <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+  </head>
+  
+  <body>
+    <!-- Header Section Start -->
+    <header id="slider-area">  
+      <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
+        <div class="container">  
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="lni-menu"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto w-100 justify-content-end">
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" href="#slider-area" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
+                  <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
+                  <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="nav-link" href="">Importar Word</a>
+                    <a class="nav-link" href="">Importar Mala</a>
+                    <a class="nav-link" href="">Importar Folha</a>
+                    <a class="nav-link" href="">Importar Beneficio</a>
+                    <a class="nav-link" href="">Importar CNPJ Notas</a>
+                    <a class="nav-link" href="">Importar Notas</a>
+                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
+                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
+                </div>
+              </li>
+              {% if user.is_anonymous %}
+              {% else %}
+              <li class="nav-item">
+                <a class="nav-link page-scroll" href="{% url 'logout' %}">Sair</a>
+              </li>
+              {% endif %}  
+
+            </ul>              
+          </div>
+        </div>
+      </nav>
+
+
+    </header>
+    <!-- Header Section End --> 
+
+    <div class="form-container form-center container d-flex justify-content-center align-items-center">
+    <!-- Features Section Start -->
+    <section id="admissao" class="section">
+      <div class="container">
+        <div class="section-header">          
+          <h2 class="section-title">EDIÇÃO PCF:</h2>
+          <span>MAPLE BEAR</span>
+        </div>
+        <div class="row">
+
+
+          <form action="#" method="POST" class="form-horizontal container" autocomplete="off"
+          enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="form-header">
+              {% if form.errors %}
+
+                      {% for field in form %}
+                          {% for error in field.errors %}
+                              <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                                  <span class="text-sm">{{ error }}</span>
+                                  <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                          {% endfor %}
+                      {% endfor %}
+
+              {% endif %}
+
+              {% if messages %}
+                  {% for message in messages %}
+                  {% if message.tags == 'success' %}
+                      <div class="position-fixed bottom-1 end-1 z-index-2">
+                          <div class="toast fade show p-2 bg-white" role="alert" aria-live="assertive" id="successToast" aria-atomic="true">
+                              <div class="toast-header border-0">
+                                  <i class="material-icons text-success me-2">check</i>
+                                  <span class="me-auto font-weight-bold">Notificação do sistema</span>
+                                  <small class="text-body">1 seg atrás</small>
+                                  <i class="fas fa-times text-md ms-3 cursor-pointer" data-bs-dismiss="toast" aria-label="Close"></i>
+                              </div>
+                                  <hr class="horizontal dark m-0">
+                              <div class="toast-body">
+                                      {{ message }}<br>
+                              </div>
+                          </div>
+                      </div>
+                  {% elif message.tags == 'error' %}
+                      <div class="alert alert-danger alert-dismissible text-white" role="alert">
+                          <span class="text-sm">{{ message }}</span>
+                          <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                  {% elif message.tags == 'warning' %}
+                      
+                      <div class="alert alert-info2 alert-dismissible text-white" role="alert">
+                          <span class="text-sm">{{ message }}</span>
+                          <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                  {% else %}
+                    <li>{{ message }}</li>
+                  {% endif %}
+                  {% endfor %}
+              {% endif %}
+              <div class="input-group">
+                  <div class="input-box">
+                      <div class="select">
+                          <div id="camposAdicionais" class="select produto-quantidade">
+                            <div class="form-contratos">
+                                <div class="comp-nota-1">Nome:</div>
+                                <div class="comp-nota-1">{{ form.nome }}</div>
+                            </div>
+                            <div class="form-contratos">
+                                <div class="comp-nota-1">E-mail:</div>
+                                <div class="comp-nota-1">{{ form.email }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">CPF:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">RG:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.rg }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Nacionalidade:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.nascionalidade }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Estado Civil:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.estado_civil }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Data de Recebimento da Oferta:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_recebimento_da_oferta }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">UF Pretendido:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.uf_pretendido }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                                <div class="tipo-de-faturamento-1">Cidade Pretendida:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="dias_vigencia">
+                                <div class="tipo-de-faturamento-1">Dias de Vigência:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.dias_vigencia }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_de_inicio_contrato">
+                                <div class="tipo-de-faturamento-1">Data de Inicio Contrato:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_inicio_contrato }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_do_fim_contrato">
+                                <div class="tipo-de-faturamento-1">Data do Fim do Contrato:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_do_fim_contrato }}</div>
+                            </div>
+                            <div class="form-contratos" id="taxa_inicial_franquia">
+                                <div class="comp-nota-1">Taxa Inicial da Franquia:</div>
+                                <div class="comp-nota-1">{{ form.taxa_inicial_franquia }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="cambio_valor">
+                                <div class="tipo-de-faturamento-1">Valor do Câmbio:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.cambio_valor }}</div>
+                            </div>
+                            <div class="form-contratos" id="cambio_data">
+                                <div class="comp-nota-1">Data do Câmbio:</div>
+                                <div class="comp-nota-1">{{ form.cambio_data }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento" id="data_de_assinatura">
+                                <div class="tipo-de-faturamento-1">Data de Assinatura:</div>
+                                <div class="tipo-de-faturamento-1">{{ form.data_de_assinatura }}</div>
+                            </div>
+                            <div class="form-contratos" id="outros">
+                                <div class="comp-nota-1">Outros Detalhes:</div>
+                                <div class="comp-nota-1">{{ form.outros }}</div>
+                            </div>
+
+                          </div>
+
+
+                      </div>
+                  </div>
+              </div>
+              <div class="login-button">
+                  <button type="submit" class="btn btn-primary">Cadastrar</button>
+              </div>
+
+          </div>
+      </form>
+
+        </div>
+      </div>
+    </section>
+    </div>
+    <!-- Features Section End -->   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </footer>
+    <!-- Footer Section End --> 
+
+    <!-- Go To Top Link -->
+    <a href="#" class="back-to-top">
+      <i class="lni-arrow-up"></i>
+    </a>
+
+    <div id="loader">
+      <div class="spinner">
+        <div class="double-bounce1"></div>
+        <div class="double-bounce2"></div>
+      </div>
+    </div>    
+
+    <!-- jQuery first, then Tether, then Bootstrap JS. -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#id_cliente_gi').change(function () {
+                let cliente_gi_id = $(this).val();
+                $.get('/api/departamentos/?cliente_gi_id=' + cliente_gi_id, function (data) {
+                    let select = $('#id_departamento');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function (index, value) {
+                        select.append('<option value="' + value.id + '">' + value.nome_departamento + '</option>');
+                    });
+                });
+                $.get('/api/bases/?cliente_gi_id=' + cliente_gi_id, function (data) {
+                    let select = $('#id_cargo');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function (index, value) {
+                        select.append('<option value="' + value.id + '">' + value.cargo + '</option>');
+                    });
+                });
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#id_departamento').change(function() {
+                var departamento_id = $(this).val();
+                $.getJSON('/api/turnos/?departamento_id=' + departamento_id, function(data) {
+                    var select = $('#id_turno');
+                    select.empty();
+                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
+                    $.each(data, function(index, value) {
+                        select.append('<option value="' + value.id + '">' + value.nome + '</option>');
+                    });
+                });
+            });
+        });
+    </script>
+    <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
+    <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/classie.js' %}"></script>
+    <script src="{% static 'assets_2/js/color-switcher.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.mixitup.js' %}"></script>
+    <script src="{% static 'assets_2/js/nivo-lightbox.js' %}"></script>
+    <script src="{% static 'assets_2/js/owl.carousel.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.stellar.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/scrolling-nav.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.easing.min.js' %}"></script>     
+    <script src="{% static 'assets_2/js/wow.js' %}"></script> 
+    <script src="{% static 'assets_2/js/jquery.vide.js' %}"></script>
+    <script src="{% static 'assets_2/js/jquery.counterup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/jquery.magnific-popup.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/waypoints.min.js' %}"></script>    
+    <script src="{% static 'assets_2/js/form-validator.min.js' %}"></script>
+    <script src="{% static 'assets_2/js/contact-form-script.js' %}"></script>   
+    <script src="{% static 'assets_2/js/main.js' %}"></script>
+    <script>
+      window.STATIC_URL = "{% static '' %}";
+    </script>
+    
+  </body>
+</html>
