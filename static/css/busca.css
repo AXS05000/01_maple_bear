@@ -4,7 +4,7 @@
   --bs-purple: #6f42c1;
   --bs-pink: #d63384;
   --bs-red: #F56565;
-  --bs-orange: #fd7e14;
+  --bs-orange: #ba332e;
   --bs-yellow: #FBD38D;
   --bs-green: #81E6D9;
   --bs-teal: #20c997;
@@ -25,7 +25,7 @@
   --bs-secondary: #7b809a;
   --bs-success: #4CAF50;
   --bs-info: #1A73E8;
-  --bs-warning: #fb8c00;
+  --bs-warning: #ba332e;
   --bs-danger: #F44335;
   --bs-light: #f0f2f5;
   --bs-dark: #344767;
@@ -129,7 +129,7 @@
 .input-group.input-group-dynamic .form-control:focus,
 .input-group.input-group-static .form-control,
 .input-group.input-group-static .form-control:focus {
-  background-image: linear-gradient(0deg, #ff950b 2px, rgba(156, 39, 176, 0) 0), linear-gradient(0deg, #d2d2d2 1px, rgba(209, 209, 209, 0) 0);
+  background-image: linear-gradient(0deg, #ba332e 2px, rgba(156, 39, 176, 0) 0), linear-gradient(0deg, #d2d2d2 1px, rgba(209, 209, 209, 0) 0);
   border-radius: 0 !important;
 }
 
