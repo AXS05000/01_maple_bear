@@ -90,13 +90,13 @@ def upload_template(request):
 #         form.instance.created_by = self.request.user
 #         return super().form_valid(form)
 
-#     def form_invalid(self, form):
-#         for field, errors in form.errors.items():
-#             for error in errors:
-#                 messages.error(
-#                     self.request, f"Erro no campo '{form.fields[field].label}': {error}"
-#                 )
-#         return super().form_invalid(form)
+    # def form_invalid(self, form):
+    #     for field, errors in form.errors.items():
+    #         for error in errors:
+    #             messages.error(
+    #                 self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+    #             )
+    #     return super().form_invalid(form)
 
 
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
@@ -129,32 +129,32 @@ class FormCandidatoCreateView(CreateView):
                 form.instance.created_by = self.request.user
             self.object = form.save()
         return HttpResponseRedirect(self.get_success_url())
+    
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(
+                    self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+                )
+        return super().form_invalid(form)
 
-    def validate_cpf(value):
-        if len(value) != 11 or not value.isdigit():
-            return False
-        cpf = [int(char) for char in value]
-        if cpf == cpf[::-1]:
-            return False
-        for i in range(9):
-            val = sum((cpf[num] * ((10 - i) % 11)) for num in range(0, 10))
-            digit = ((val * 10) % 11) % 10
-            if digit != cpf[9]:
-                return False
-        val = sum((cpf[num] * ((11 - i) % 11)) for num in range(0, 11))
-        digit = ((val * 10) % 11) % 10
-        if digit != cpf[10]:
-            return False
-        return True
 
 
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
 class CandidatoUpdateView(UpdateView):
     model = Contrato
+    form_class = AdmissaoForm
     template_name = "admissao/formulario_candidato_edit.html"
-    fields = "__all__"
     success_url = reverse_lazy("busca_candidato")
 
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(
+                    self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+                )
+        return super().form_invalid(form)
 
 ####################GERAÇÃO DO CONTRATO EM PDF##########################
 

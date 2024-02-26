@@ -81,21 +81,6 @@
           enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-header">
-              {% if form.errors %}
-
-                      {% for field in form %}
-                          {% for error in field.errors %}
-                              <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                                  <span class="text-sm">{{ error }}</span>
-                                  <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </div>
-                          {% endfor %}
-                      {% endfor %}
-
-              {% endif %}
-
               {% if messages %}
                   {% for message in messages %}
                   {% if message.tags == 'success' %}
@@ -198,50 +183,7 @@
                               <div class="comp-nota-1">{{ form.cep|addattrs:"id=cep" }}</div>
                             </div>
 
-                            <div class="tipo-de-faturamento">
-                                <div class="tipo-de-faturamento-1">Data de Recebimento da Oferta:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.data_de_recebimento_da_oferta }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento">
-                                <div class="tipo-de-faturamento-1">UF Pretendido:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.uf_pretendido }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento">
-                                <div class="tipo-de-faturamento-1">Cidade Pretendida:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento" id="dias_vigencia">
-                                <div class="tipo-de-faturamento-1">Dias de Vigência:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.dias_vigencia }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento" id="data_de_inicio_contrato">
-                                <div class="tipo-de-faturamento-1">Data de Inicio Contrato:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.data_de_inicio_contrato }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento" id="data_do_fim_contrato">
-                                <div class="tipo-de-faturamento-1">Data do Fim do Contrato:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.data_do_fim_contrato }}</div>
-                            </div>
-                            <div class="form-contratos" id="taxa_inicial_franquia">
-                                <div class="comp-nota-1">Taxa Inicial da Franquia:</div>
-                                <div class="comp-nota-1">{{ form.taxa_inicial_franquia }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento" id="cambio_valor">
-                                <div class="tipo-de-faturamento-1">Valor do Câmbio:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.cambio_valor }}</div>
-                            </div>
-                            <div class="form-contratos" id="cambio_data">
-                                <div class="comp-nota-1">Data do Câmbio:</div>
-                                <div class="comp-nota-1">{{ form.cambio_data }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento" id="data_de_assinatura">
-                                <div class="tipo-de-faturamento-1">Data de Assinatura:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.data_de_assinatura }}</div>
-                            </div>
-                            <div class="form-contratos" id="outros">
-                                <div class="comp-nota-1">Outros Detalhes:</div>
-                                <div class="comp-nota-1">{{ form.outros }}</div>
-                            </div>
+
 
                           </div>
 
@@ -421,7 +363,34 @@
         }
       });
     </script>
-    
+    <script>
+      // Função para fechar alertas automaticamente após 7 segundos
+      function closeAlertsAutomatically() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(function(alert) {
+          // Define um timeout para fechar o alerta após 7 segundos (7000ms)
+          setTimeout(function() {
+            $(alert).alert('close');
+          }, 7000);
+        });
+      }
+      
+      // Fecha o alerta quando o botão de fechar é clicado
+      function enableCloseButton() {
+        const closeButtons = document.querySelectorAll('.alert-dismissible .btn-close');
+        closeButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            $(this.parentElement).alert('close');
+          });
+        });
+      }
+      
+      // Chamada das funções quando a janela carrega
+      window.onload = function() {
+        closeAlertsAutomatically();
+        enableCloseButton();
+      };
+      </script>
     
   </body>
 </html>

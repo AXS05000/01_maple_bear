@@ -1,3 +1,4 @@
+{% load filters %}
 {% load static %}
 
 <!DOCTYPE html>
@@ -49,19 +50,6 @@
                   <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
                 </div>
               </li>
-              <li class="nav-item dropdown">
-                <a class="nav-link nav-link-ded dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Importações</a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="nav-link" href="">Importar Word</a>
-                    <a class="nav-link" href="">Importar Mala</a>
-                    <a class="nav-link" href="">Importar Folha</a>
-                    <a class="nav-link" href="">Importar Beneficio</a>
-                    <a class="nav-link" href="">Importar CNPJ Notas</a>
-                    <a class="nav-link" href="">Importar Notas</a>
-                    {% comment %} <div class="dropdown-divider"></div> {% endcomment %}
-                    {% comment %} <a class="dropdown-item" href="#">Tes</a> {% endcomment %}
-                </div>
-              </li>
               {% if user.is_anonymous %}
               {% else %}
               <li class="nav-item">
@@ -83,7 +71,7 @@
     <section id="admissao" class="section">
       <div class="container">
         <div class="section-header">          
-          <h2 class="section-title">EDIÇÃO PCF:</h2>
+          <h2 class="section-title">CRIAÇÃO PCF:</h2>
           <span>MAPLE BEAR</span>
         </div>
         <div class="row">
@@ -93,21 +81,6 @@
           enctype="multipart/form-data">
           {% csrf_token %}
           <div class="form-header">
-              {% if form.errors %}
-
-                      {% for field in form %}
-                          {% for error in field.errors %}
-                              <div class="alert alert-danger alert-dismissible text-white" role="alert">
-                                  <span class="text-sm">{{ error }}</span>
-                                  <button type="button" class="btn-close text-lg py-3 opacity-10 cursor-pointer" data-bs-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </div>
-                          {% endfor %}
-                      {% endfor %}
-
-              {% endif %}
-
               {% if messages %}
                   {% for message in messages %}
                   {% if message.tags == 'success' %}
@@ -169,10 +142,47 @@
                                 <div class="tipo-de-faturamento-1">Nacionalidade:</div>
                                 <div class="tipo-de-faturamento-1">{{ form.nascionalidade }}</div>
                             </div>
+                            
                             <div class="tipo-de-faturamento">
                                 <div class="tipo-de-faturamento-1">Estado Civil:</div>
                                 <div class="tipo-de-faturamento-1">{{ form.estado_civil }}</div>
                             </div>
+                            
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Endereço:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.endereco }}</div>
+                            </div>
+                            
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Numero:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.numero }}</div>
+                            </div>
+
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Complemento:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.complemento }}</div>
+                            </div>
+                            
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Bairro:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.bairro }}</div>
+                            </div>
+                            
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Cidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.cidade_endereco }}</div>
+                            </div>         
+
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">UF:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.uf_endereco }}</div>
+                            </div> 
+                            
+                            <div class="form-contratos" id="produto7">
+                              <div class="comp-nota-1">CEP:</div>
+                              <div class="comp-nota-1">{{ form.cep|addattrs:"id=cep" }}</div>
+                            </div>
+
                             <div class="tipo-de-faturamento">
                                 <div class="tipo-de-faturamento-1">Data de Recebimento da Oferta:</div>
                                 <div class="tipo-de-faturamento-1">{{ form.data_de_recebimento_da_oferta }}</div>
@@ -251,6 +261,7 @@
 
 
 
+    
 
     </footer>
     <!-- Footer Section End --> 
@@ -268,46 +279,6 @@
     </div>    
 
     <!-- jQuery first, then Tether, then Bootstrap JS. -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#id_cliente_gi').change(function () {
-                let cliente_gi_id = $(this).val();
-                $.get('/api/departamentos/?cliente_gi_id=' + cliente_gi_id, function (data) {
-                    let select = $('#id_departamento');
-                    select.empty();
-                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
-                    $.each(data, function (index, value) {
-                        select.append('<option value="' + value.id + '">' + value.nome_departamento + '</option>');
-                    });
-                });
-                $.get('/api/bases/?cliente_gi_id=' + cliente_gi_id, function (data) {
-                    let select = $('#id_cargo');
-                    select.empty();
-                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
-                    $.each(data, function (index, value) {
-                        select.append('<option value="' + value.id + '">' + value.cargo + '</option>');
-                    });
-                });
-            });
-        });
-    </script>
-    <script>
-        $(document).ready(function() {
-            $('#id_departamento').change(function() {
-                var departamento_id = $(this).val();
-                $.getJSON('/api/turnos/?departamento_id=' + departamento_id, function(data) {
-                    var select = $('#id_turno');
-                    select.empty();
-                    select.append('<option value="" selected>---------</option>'); // Adicionado aqui
-                    $.each(data, function(index, value) {
-                        select.append('<option value="' + value.id + '">' + value.nome + '</option>');
-                    });
-                });
-            });
-        });
-    </script>
     <script src="{% static 'assets_2/js/jquery-min.js' %}"></script>
     <script src="{% static 'assets_2/js/popper.min.js' %}"></script>
     <script src="{% static 'assets_2/js/bootstrap.min.js' %}"></script>
@@ -331,6 +302,138 @@
     <script>
       window.STATIC_URL = "{% static '' %}";
     </script>
+    <script>
+      function formatar(mascara, documento) {
+        var i = 0;
+        var valor = documento.value.replace(/\D/g, '');
+        var formatado = '';
+      
+        for (var m = 0; m < mascara.length; m++) {
+          if (mascara[m] === '#') {
+            if (valor[i] !== undefined) {
+              formatado += valor[i++];
+            }
+          } else {
+            formatado += mascara[m];
+          }
+        }
+      
+        documento.value = formatado;
+      }
+    
+      document.getElementById('cpf').addEventListener('input', function() {
+        var cpf = this.value.replace(/\D/g, '');
+        var mascara = '###.###.###-##';
+    
+        if (cpf.length <= 3) {
+          mascara = '###';
+        } else if (cpf.length <= 6) {
+          mascara = '###.###';
+        } else if (cpf.length <= 9) {
+          mascara = '###.###.###';
+        }
+    
+        formatar(mascara, this);
+      });
+   
+      document.getElementById('cep').addEventListener('input', function() {
+        var cep = this.value.replace(/\D/g, '');
+        var mascara = '#####-###';
+    
+        if (cep.length <= 5) {
+          mascara = '#####';
+        } else if (cep.length > 5) {
+          mascara = '#####-###';
+        }
+    
+        formatar(mascara, this);
+      });
+    
+      document.getElementById('cpf').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cpf = this.value.replace(/\D/g, '');
+          var mascara = '###.###.###-##';
+    
+          if (cpf.length <= 3) {
+            mascara = '###';
+          } else if (cpf.length <= 6) {
+            mascara = '###.###';
+          } else if (cpf.length <= 9) {
+            mascara = '###.###.###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+    
+      document.getElementById('celular').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var celular = this.value.replace(/\D/g, '');
+          var mascara = '## #####-####';
+    
+          if (celular.length <= 6) {
+            mascara = '## ####-####';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+    
+      document.getElementById('cep').addEventListener('keydown', function(event) {
+        if (event.keyCode === 8) { // Tecla "Backspace"
+          event.preventDefault();
+          var value = this.value.replace(/\D/g, ''); // Remove todos os caracteres não numéricos
+          this.value = value.substring(0, value.length - 1); // Remove o último caractere
+    
+          var cep = this.value.replace(/\D/g, '');
+          var mascara = '#####-###';
+    
+          if (cep.length <= 5) {
+            mascara = '#####';
+          } else if (cep.length > 5) {
+            mascara = '#####-###';
+          }
+    
+          formatar(mascara, this);
+        }
+      });
+    </script>
+    <script>
+      // Função para fechar alertas automaticamente após 7 segundos
+      function closeAlertsAutomatically() {
+        const alerts = document.querySelectorAll('.alert-dismissible');
+        alerts.forEach(function(alert) {
+          // Define um timeout para fechar o alerta após 7 segundos (7000ms)
+          setTimeout(function() {
+            $(alert).alert('close');
+          }, 7000);
+        });
+      }
+      
+      // Fecha o alerta quando o botão de fechar é clicado
+      function enableCloseButton() {
+        const closeButtons = document.querySelectorAll('.alert-dismissible .btn-close');
+        closeButtons.forEach(function(button) {
+          button.addEventListener('click', function() {
+            $(this.parentElement).alert('close');
+          });
+        });
+      }
+      
+      // Chamada das funções quando a janela carrega
+      window.onload = function() {
+        closeAlertsAutomatically();
+        enableCloseButton();
+      };
+      </script>
     
   </body>
 </html>

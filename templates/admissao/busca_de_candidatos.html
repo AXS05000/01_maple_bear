@@ -120,6 +120,9 @@
                   <td>
                     <p>{{ contrato.email }}</p>
                   </td>
+                  <td>
+                    <a href="{% url 'candidato_edit' contrato.id %}">Editar</a>
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
