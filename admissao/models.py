@@ -1,6 +1,6 @@
 from django.db import models
 from usuarios.models import CustomUsuario
-
+from num2words import num2words
 
 # Create your views here.
 class Base(models.Model):
@@ -71,6 +71,9 @@ class Templates(Base):
     def __str__(self):
         return f"{self.name}"
 
+def formatar_valor(valor):
+    return "{:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+
 
 class Contrato(Base):
     nome = models.CharField(max_length=200)
@@ -102,6 +105,12 @@ class Contrato(Base):
         return f"{self.nome}"
 
     def get_field_values(self):
+        dias_por_extenso = num2words(self.dias_vigencia, lang='pt_BR')
+        valor_dolar_extenso = num2words(self.taxa_inicial_franquia, lang='pt_BR')
+        total_pagamento = self.cambio_valor * self.taxa_inicial_franquia
+        total_pagamento_formatado = formatar_valor(total_pagamento)
+        taxa_inicial_franquia_formatado = formatar_valor(self.taxa_inicial_franquia)
+        cambio_valor_formatado = formatar_valor(self.cambio_valor)
         return {
             "{nome}": self.nome,
             "{cpf}": self.cpf,
@@ -117,6 +126,7 @@ class Contrato(Base):
             "{uf_pretendido}": self.uf_pretendido,
             "{cidade}": self.cidade,
             "{dias_vigencia}": self.dias_vigencia,
+            "{dias_por_extenso}": dias_por_extenso,
             "{data_de_inicio_contrato}": (
                 self.data_de_inicio_contrato.strftime("%d/%m/%Y")
                 if self.data_de_inicio_contrato
@@ -127,8 +137,10 @@ class Contrato(Base):
                 if self.data_do_fim_contrato
                 else ""
             ),
-            "{taxa_inicial_franquia}": self.taxa_inicial_franquia,
-            "{cambio_valor}": self.cambio_valor,
+            "{taxa_inicial_franquia}": taxa_inicial_franquia_formatado,
+            "{valor_dolar_extenso}": valor_dolar_extenso,
+            "{total_a_ser_pago}": total_pagamento_formatado,
+            "{cambio_valor}": cambio_valor_formatado,
             "{cambio_data}": (
                 self.cambio_data.strftime("%d/%m/%Y") if self.cambio_data else ""
             ),
