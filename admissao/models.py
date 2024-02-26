@@ -1,7 +1,7 @@
 from django.db import models
 from usuarios.models import CustomUsuario
 from num2words import num2words
-
+from decimal import Decimal, ROUND_DOWN
 # Create your views here.
 class Base(models.Model):
     data_de_criacao = models.DateField("Data de Criação", auto_now_add=True)
@@ -72,7 +72,27 @@ class Templates(Base):
         return f"{self.name}"
 
 def formatar_valor(valor):
-    return "{:,.2f}".format(valor).replace(",", "X").replace(".", ",").replace("X", ".")
+    # Converte para Decimal para manter precisão e evitar arredondamento indesejado
+    valor_decimal = Decimal(valor)
+    # Formata com separadores de milhar e mantém as casas decimais originais
+    valor_formatado = "{:,.{}f}".format(valor_decimal, valor_decimal.as_tuple().exponent * -1).replace(",", "X").replace(".", ",").replace("X", ".")
+    return valor_formatado
+
+def numero_por_extenso(valor, moeda='real'):
+    valor_inteiro = int(valor)
+    centavos = int((valor - valor_inteiro) * 100)
+    texto = num2words(valor_inteiro, lang='pt_BR')
+    
+    if moeda == 'dolar':
+        texto += " dólares" if valor_inteiro > 1 else " dólar"
+    else:
+        texto += " reais" if valor_inteiro > 1 else " real"
+    
+    if centavos > 0:
+        texto += " e " + num2words(centavos, lang='pt_BR')
+        texto += " centavos"
+    
+    return texto.capitalize()
 
 
 class Contrato(Base):
@@ -106,12 +126,13 @@ class Contrato(Base):
 
     def get_field_values(self):
         dias_por_extenso = num2words(self.dias_vigencia, lang='pt_BR')
-        valor_dolar_extenso = num2words(self.taxa_inicial_franquia, lang='pt_BR')
+        valor_dolar_extenso = numero_por_extenso(self.taxa_inicial_franquia, 'dolar')
         total_pagamento = self.cambio_valor * self.taxa_inicial_franquia
         total_pagamento_formatado = formatar_valor(total_pagamento)
-        total_pagamento_extenso = num2words(total_pagamento, lang='pt_BR')
+        total_pagamento_extenso = numero_por_extenso(total_pagamento, 'real')
         taxa_inicial_franquia_formatado = formatar_valor(self.taxa_inicial_franquia)
         cambio_valor_formatado = formatar_valor(self.cambio_valor)
+        
         return {
             "{nome}": self.nome,
             "{cpf}": self.cpf,
