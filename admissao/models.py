@@ -74,11 +74,12 @@ class Templates(Base):
 def formatar_valor(valor):
     # Converte para Decimal para manter precisão
     valor_decimal = Decimal(valor)
-    # Determina a quantidade de casas decimais
-    casas_decimais = max(2, abs(valor_decimal.as_tuple().exponent))
-    # Formata sem arredondar, mantendo as casas decimais exatas
-    valor_formatado = "{:,.{}f}".format(valor_decimal, casas_decimais).replace(",", "X").replace(".", ",").replace("X", ".")
-    return valor_formatado
+    # Formata com separadores de milhar e duas casas decimais
+    # Usando quantize para evitar arredondamento indesejado
+    valor_formatado = valor_decimal.quantize(Decimal("1.00"), rounding=ROUND_DOWN)
+    # Formata com o padrão brasileiro de milhar e decimal
+    return "{:,.2f}".format(valor_formatado).replace(",", "X").replace(".", ",").replace("X", ".")
+
 
 def numero_por_extenso(valor, moeda='real'):
     valor_inteiro = int(valor)
