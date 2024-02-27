@@ -5,7 +5,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Contrato, Templates, AvaliacaoFDMP
 from django.db.models import Q
-from .forms import UploadFileForm, AdmissaoForm, FDMPForm
+from .forms import UploadFileForm, AdmissaoForm, FDMPForm, FDMPFormEdit
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -347,10 +347,14 @@ class FormFDMPFormCreateView(CreateView):
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
 class FormFDMPUpdateView(UpdateView):
     model = AvaliacaoFDMP
-    form_class = FDMPForm
+    form_class = FDMPFormEdit
     template_name = "admissao/formulario_fdmp_edit.html"
     success_url = reverse_lazy("busca_escolas")
 
+    def form_valid(self, form):
+        if 'cnpj' in form.changed_data:
+            form.instance.cnpj = AvaliacaoFDMP.objects.get(pk=form.instance.pk).cnpj
+        return super().form_valid(form)
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():
