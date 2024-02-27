@@ -127,7 +127,9 @@
                     <p>{{ contrato.cpf }}</p>
                   </td>
                   <td>
-                    <a href="{% url 'form_fdmp_edit' contrato.id %}">Editar</a>
+                    <a href="{% url 'form_fdmp_edit' contrato.id %}">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
                   </td>
                 </tr>
               {% endfor %}

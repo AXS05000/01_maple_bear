@@ -111,6 +111,7 @@
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
                 <th scope="col">E-mail</th>
+                <th scope="col">Editar</th>
 
               </tr>
             </thead>
@@ -127,7 +128,9 @@
                     <p>{{ contrato.email }}</p>
                   </td>
                   <td>
-                    <a href="{% url 'candidato_edit' contrato.id %}">Editar</a>
+                    <a href="{% url 'form_fdmp_edit' contrato.id %}">
+                      <i class="fa fa-pencil-square-o"></i>
+                    </a>
                   </td>
                 </tr>
               {% endfor %}
