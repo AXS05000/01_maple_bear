@@ -33,7 +33,7 @@
   
   <body>
     <!-- Header Section Start -->
-    <header id="slider-area">  
+    <header id="slider-escola">  
       <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
         <div class="container">  
           <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
@@ -48,14 +48,20 @@
               </li>
               
               <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" href="#slider-area" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
                   <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
                   <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
                   <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
                 </div>
               </li>
-
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                <div class="dropdown-menu" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_escolas' %}">Buscar Escolas</a>
+                  <a class="nav-link" href="{% url 'form_fdmp' %}">Formulário FDMP</a>
+                </div>
+              </li>
 
 
               {% if user.is_anonymous %}
@@ -112,7 +118,7 @@
               {% for contrato in object_list %}
                 <tr>
                   <td>
-                    <a href="#">{{ contrato.cnpj }}</a>
+                    <p>{{ contrato.cnpj }}</p>
                   </td>
                   <td>
                     <p>{{ contrato.nome }}</p>
@@ -121,7 +127,7 @@
                     <p>{{ contrato.cpf }}</p>
                   </td>
                   <td>
-                    <a href="#">Editar</a>
+                    <a href="{% url 'form_fdmp_edit' contrato.id %}">Editar</a>
                   </td>
                 </tr>
               {% endfor %}

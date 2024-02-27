@@ -107,6 +107,10 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   color: #ba332e;
 }
 
+.espacamento-formulario {
+  min-width: 500px;
+}
+
 /* ==========================================================================
    2.1 Section Title
    ========================================================================== */

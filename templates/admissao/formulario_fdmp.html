@@ -43,11 +43,18 @@
                 <a class="nav-link page-scroll" href="{% url 'index' %}">Home</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" href="#slider-area" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" id="dropdownContratos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Contratos</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown" style="min-width: 200px;">
                   <a class="nav-link" href="{% url 'busca_candidato' %}">Buscar Candidatos</a>
                   <a class="nav-link" href="{% url 'form_candidato' %}">Formulário PCF</a>
                   <a class="nav-link" href="{% url 'upload_template' %}">Importar Modelo de Contrato</a>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link page-scroll nav-link-ded dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Escolas</a>
+                <div class="dropdown-menu" style="min-width: 200px;">
+                  <a class="nav-link" href="{% url 'busca_escolas' %}">Buscar Escolas</a>
+                  <a class="nav-link" href="{% url 'form_fdmp' %}">Formulário FDMP</a>
                 </div>
               </li>
               {% if user.is_anonymous %}
@@ -65,22 +72,6 @@
 
     </header>
     <!-- Header Section End --> 
-    <section id="mensagem" class="section">
-    <div class="text-center">
-      <h3 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">INFORMAÇÕES GERAIS!</h3>
-      <h6 class="wow fadeInRight" data-wow-delay="0.6s">Por favor, preencha abaixo o número de <span class="text-red-maple">alunos</span> e valor médio da <span class="text-red-maple">mensalidade</span> por Série Escolar.</h6>
-      <br><br><h7 class="wow fadeInLeft" data-wow-delay="0.8s">NÚMERO DE ALUNOS</h7>
-      <h6 class="wow fadeInLeft" data-wow-delay="0.11s">Preencher campo com número total de alunos, excluindo bolsistas integrais.
-        Caso sua escola não ofereça essa série, deixe o valor como "0".</h6>
-
-      <br><br><h7 class="wow fadeInLeft" data-wow-delay="0.8s">MENSALIDADE MÉDIA</h7>
-      <h6 class="wow fadeInLeft" data-wow-delay="0.13s">Preencher campo com valor médio da mensalidade praticado na série escolar, excluindo custos adicionais como materiais, transporte, alimentação e outros, se houverem.
-        Valor Médio pode contemplar os descontos oferecidos pela escola, como familiar, bolsas parciais</h6>
-        
-      
-      {% comment %} <br><a href="https://www.maplebear.com.br/pt/metodologia-canadense/" class="btn btn-lg btn-common btn-effect wow fadeInRight" data-wow-delay="0.9s">Orientações</a> {% endcomment %}
-    </div> 
-   </section>
     <div class="form-container form-center container d-flex justify-content-center align-items-center">
       
     <!-- Features Section Start -->

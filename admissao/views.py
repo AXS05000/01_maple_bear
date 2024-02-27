@@ -345,6 +345,24 @@ class FormFDMPFormCreateView(CreateView):
 
 
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
+class FormFDMPUpdateView(UpdateView):
+    model = AvaliacaoFDMP
+    form_class = FDMPForm
+    template_name = "admissao/formulario_fdmp_edit.html"
+    success_url = reverse_lazy("busca_escolas")
+
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(
+                    self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+                )
+        return super().form_invalid(form)
+
+
+
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
 class EscolasSearchView(ListView):
     model = AvaliacaoFDMP
     template_name = "admissao/busca_escolas.html"
@@ -384,3 +402,4 @@ class EscolasSearchView(ListView):
         if query:
             return AvaliacaoFDMP.objects.filter(Q(cpf__icontains=query)).order_by(order_by)
         return AvaliacaoFDMP.objects.all().order_by(order_by)
+    
