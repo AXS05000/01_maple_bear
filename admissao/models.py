@@ -186,3 +186,48 @@ class Contrato(Base):
             "{uf_endereco}": self.uf_endereco,
             "{cep}": self.cep,
         }
+
+
+
+
+class AvaliacaoFDMP(Base):
+    cnpj = models.CharField(max_length=18)
+    nome = models.CharField(max_length=200)
+    cpf = models.CharField(max_length=14)
+    early_toddler_qtd = models.IntegerField(null=True, blank=True, default=0)
+    early_toddler_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    toddler_qtd = models.IntegerField(null=True, blank=True, default=0)
+    toddler_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    nursery_qtd = models.IntegerField(null=True, blank=True, default=0)
+    nursery_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    junior_kindergarten_qtd = models.IntegerField(null=True, blank=True, default=0)
+    junior_kindergarten_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    senior_kindergarten_qtd = models.IntegerField(null=True, blank=True, default=0)
+    senior_kindergarten_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_1_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_1_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_2_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_2_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_3_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_3_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_4_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_4_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_5_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_5_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_6_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_6_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_7_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_7_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_8_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_8_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_9_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_9_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_10_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_10_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_11_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_11_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    year_12_qtd = models.IntegerField(null=True, blank=True, default=0)
+    year_12_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+
+    def __str__(self):
+        return f"{self.nome}"

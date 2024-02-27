@@ -3,9 +3,9 @@ from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
-from .models import Contrato, Templates
+from .models import Contrato, Templates, AvaliacaoFDMP
 from django.db.models import Q
-from .forms import UploadFileForm, AdmissaoForm
+from .forms import UploadFileForm, AdmissaoForm, FDMPForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -292,3 +292,52 @@ def select_contract_id(request, pk):  # Altere 'contrato_id' para 'pk'
             "admissao/select_contract_id.html",
             {"contrato": contrato, "templates": templates},
         )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+################################ AVALIAÇÃO FDMP ##################################################
+    
+@method_decorator(login_required(login_url="/login/"), name="dispatch")
+class FormFDMPFormCreateView(CreateView):
+    model = AvaliacaoFDMP
+    form_class = FDMPForm
+    template_name = "admissao/formulario_fdmp.html"
+    success_url = reverse_lazy("form_fdmp")
+
+    def form_valid(self, form):
+        cpf = form.cleaned_data.get("cpf")
+        avaliacao_fdmp = AvaliacaoFDMP.objects.filter(cpf=cpf).first()
+
+        if avaliacao_fdmp:
+            # Atualizar o objeto existente
+            for field, value in form.cleaned_data.items():
+                if value is not None and hasattr(avaliacao_fdmp, field):
+                    setattr(avaliacao_fdmp, field, value)
+            avaliacao_fdmp.save()
+            self.object = avaliacao_fdmp
+        else:
+            # Criar um novo objeto
+            self.object = form.save()
+
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_invalid(self, form):
+        for field, errors in form.errors.items():
+            for error in errors:
+                messages.error(
+                    self.request, f"Erro no campo '{form.fields[field].label}': {error}"
+                )
+        return super().form_invalid(form)

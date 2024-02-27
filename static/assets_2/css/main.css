@@ -45,6 +45,22 @@ h1, h2, h3, h4, h5 {
   color: #263238;
 }
 
+h7 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: #263238;
+}
+
+h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 21px;
+  color: #263238;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 20px
+}
+
 h8, h9 {
   font-family: 'Montserrat', sans-serif;
   font-size: 25px;
@@ -85,6 +101,10 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
 
 .brand-logo {
   content: var(--brand-image);
+}
+
+.text-red-maple {
+  color: #ba332e;
 }
 
 /* ==========================================================================
