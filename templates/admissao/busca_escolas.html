@@ -80,8 +80,8 @@
     <section id="busca" class="section">
       <div class="container">
         <div class="section-header">          
-          <h2 class="section-title">BUSQUE O CANDIDATO:</h2>
-          <span>CANDIDATURAS</span>
+          <h2 class="section-title">BUSQUE AS ESCOLAS:</h2>
+          <span>MAPLE BEAR</span>
         </div>
         <div class="row">
           <div class="row text-center py-2 mt-3">
@@ -89,7 +89,7 @@
                 <div class="input-group input-group-dynamic mb-4" >
                     <span class="input-group-text"><i class="fas fa-search" aria-hidden="true"></i></span>
                     <form method="GET" action="" class="w-100" >
-                        <input id="search-input" class="form-control custom-input" type="text" name="q" placeholder="Buscar por CPF">
+                        <input id="search-input" class="form-control custom-input" type="text" name="q" placeholder="Buscar pelas Escolas">
                         <input class="form-control" type="submit" placeholder="Buscar" style="display: none;">
                     </form>
                 </div>
@@ -102,26 +102,26 @@
           <table class="table">
             <thead>
               <tr>
+                <th scope="col">CNPJ</th>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
-                <th scope="col">E-mail</th>
-
+                <th scope="col">Editar</th>
               </tr>
             </thead>
             <tbody>
               {% for contrato in object_list %}
                 <tr>
                   <td>
-                    <a href="{% url 'edit_candidato' contrato.id %}">{{ contrato.nome }}</a>
+                    <a href="#">{{ contrato.cnpj }}</a>
+                  </td>
+                  <td>
+                    <p>{{ contrato.nome }}</p>
                   </td>
                   <td>
                     <p>{{ contrato.cpf }}</p>
                   </td>
                   <td>
-                    <p>{{ contrato.email }}</p>
-                  </td>
-                  <td>
-                    <a href="{% url 'candidato_edit' contrato.id %}">Editar</a>
+                    <a href="#">Editar</a>
                   </td>
                 </tr>
               {% endfor %}
