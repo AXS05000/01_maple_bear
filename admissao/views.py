@@ -404,6 +404,6 @@ class EscolasSearchView(ListView):
         query = self.request.GET.get("q")
         order_by = self.request.GET.get("order_by", "-id")
         if query:
-            return AvaliacaoFDMP.objects.filter(Q(cpf__icontains=query)).order_by(order_by)
+            return AvaliacaoFDMP.objects.filter(Q(cnpj__icontains=query)).order_by(order_by)
         return AvaliacaoFDMP.objects.all().order_by(order_by)
     
