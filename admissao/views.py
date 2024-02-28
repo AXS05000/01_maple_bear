@@ -1,4 +1,5 @@
 import os
+import openpyxl
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.views.generic.list import ListView
@@ -17,7 +18,7 @@ from subprocess import Popen
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
 from docx.shared import Pt
-
+from django.views.generic import View
 
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
 class ContratoSearchView(ListView):
@@ -407,3 +408,28 @@ class EscolasSearchView(ListView):
             return AvaliacaoFDMP.objects.filter(Q(cnpj__icontains=query)).order_by(order_by)
         return AvaliacaoFDMP.objects.all().order_by(order_by)
     
+
+
+#################################### IMPORTAÇÃO EXCEL ###############################################
+
+
+class ExcelImportView(View):
+    def get(self, request):
+        # Retorna o template de upload de arquivo
+        return render(request, 'admissao/upload_excel.html')
+
+    def post(self, request):
+        excel_file = request.FILES['excel_file']
+        
+        # Carrega o arquivo Excel na memória
+        workbook = openpyxl.load_workbook(excel_file)
+        sheet = workbook.active
+
+        # Itera sobre as linhas do arquivo Excel
+        for row in sheet.iter_rows(min_row=2, values_only=True):  # Ignora o cabeçalho
+            cnpj = row[0]
+            if cnpj:  # Verifica se o CNPJ não está vazio
+                # Cria um novo objeto AvaliacaoFDMP
+                AvaliacaoFDMP.objects.create(cnpj=cnpj)
+        
+        return HttpResponse("Importação realizada com sucesso!")
