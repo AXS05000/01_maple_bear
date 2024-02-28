@@ -350,12 +350,14 @@ class FormFDMPUpdateView(UpdateView):
     model = AvaliacaoFDMP
     form_class = FDMPFormEdit
     template_name = "admissao/formulario_fdmp_edit.html"
-    success_url = reverse_lazy("busca_escolas")
 
     def form_valid(self, form):
+        self.object = form.save()
         if 'cnpj' in form.changed_data:
-            form.instance.cnpj = AvaliacaoFDMP.objects.get(pk=form.instance.pk).cnpj
-        return super().form_valid(form)
+            self.object.cnpj = AvaliacaoFDMP.objects.get(pk=self.object.pk).cnpj
+            self.object.save()
+        # Retorna uma resposta HTTP simples com uma mensagem de sucesso
+        return HttpResponse("Formulário enviado com sucesso!", status=200)
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():
@@ -364,6 +366,7 @@ class FormFDMPUpdateView(UpdateView):
                     self.request, f"Erro no campo '{form.fields[field].label}': {error}"
                 )
         return super().form_invalid(form)
+
 
 
 
