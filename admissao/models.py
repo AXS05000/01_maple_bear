@@ -192,10 +192,14 @@ class Contrato(Base):
 
 class AvaliacaoFDMP(Base):
     cnpj = models.CharField(max_length=18)
+    razao_social = models.CharField(max_length=200)
     nome = models.CharField(max_length=200)
     cpf = models.CharField(max_length=14)
-    early_toddler_qtd = models.IntegerField(null=True, blank=True, default=0)
-    early_toddler_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    cargo = models.CharField(max_length=200)
+    uf = models.CharField(max_length=2, choices=STATE_CHOICES)
+    cidade = models.CharField(max_length=100)
+    bear_care_qtd = models.IntegerField(null=True, blank=True, default=0)
+    bear_care_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
     toddler_qtd = models.IntegerField(null=True, blank=True, default=0)
     toddler_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
     nursery_qtd = models.IntegerField(null=True, blank=True, default=0)

@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{% static 'css/formulario.css' %}">    
     <link rel="stylesheet" href="{% static 'assets_2/css/responsive.css' %}">
     <link rel="icon" type="image/png" href="{% static 'assets_2/img/maple_bear.svg' %}">
+    <script src="https://kit.fontawesome.com/42d5adcbca.js" crossorigin="anonymous"></script>
   </head>
   
   <body>
@@ -74,22 +75,34 @@
 
     </header>
     <!-- Header Section End --> 
-    <section id="mensagem" class="section">
+    <section id="titulo" class="section">
+      <div class="section-header">   
+        <br>
+        <h2 class="section-title">PESQUISA FDMP 2024/2025:</h2>
+        <span>MAPLE BEAR</span>
+      </div>
+    </section>
+    
     <div class="text-center">
-      <h3 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">INFORMAÇÕES GERAIS!</h3>
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">INFORMAÇÕES GERAIS!</h11><br>
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">LEIA E RESPONDA COM ATENÇÃO AS QUESTÕES ABAIXO.</h11><br>
+      <h11 class="wow fadeInDown text-red-maple" data-wow-delay="0.3s">RESPOSTA ÚNICA POR UNIDADE!</h11><br><br>
       <h6 class="wow fadeInRight" data-wow-delay="0.8s">Por favor, preencha abaixo o número de <span class="text-red-maple">alunos</span> e valor médio da <span class="text-red-maple">mensalidade</span> por Série Escolar.</h6>
       <br><br><h7 class="wow fadeInRight" data-wow-delay="1.4s">NÚMERO DE ALUNOS</h7>
-      <h6 class="wow fadeInRight" data-wow-delay="1.9s">Preencher campo com número total de alunos, excluindo bolsistas integrais.
-        Caso sua escola não ofereça essa série, deixe o valor como "0".</h6>
+      <h6 class="wow fadeInRight" data-wow-delay="1.9s">Preencher campo com número <span class="text-red-maple">total de alunos.</span>
+        </h6>
+        <br><h10 class="wow fadeInRight" data-wow-delay="1.4s">BOLSISTAS:</h10>
+        <h6 class="wow fadeInRight" data-wow-delay="1.9s">Não esqueça de <span class="text-red-maple">excluir os bolsistas integrais</span>. <br>Caso sua escola não ofereça essa série, deixe o valor como "0".</h6>
 
       <br><br><h7 class="wow fadeInRight" data-wow-delay="2.4s">MENSALIDADE MÉDIA</h7>
       <h6 class="wow fadeInRight" data-wow-delay="2.9s">Preencher campo com valor médio da mensalidade praticado na série escolar, excluindo custos adicionais como materiais, transporte, alimentação e outros, se houverem.
-        Valor Médio pode contemplar os descontos oferecidos pela escola, como familiar, bolsas parciais</h6>
-        
+        <span class="text-red-maple">Valor Médio</span> pode contemplar os descontos oferecidos pela escola, como familiar, bolsas parciais.</h6>
+
       
       {% comment %} <br><a href="https://www.maplebear.com.br/pt/metodologia-canadense/" class="btn btn-lg btn-common btn-effect wow fadeInRight" data-wow-delay="0.9s">Orientações</a> {% endcomment %}
     </div> 
    </section>
+    
     <div class="form-container form-center container d-flex justify-content-center align-items-center">
       
     <!-- Features Section Start -->
@@ -98,11 +111,7 @@
       <div class="container">
 
         
-        <div class="section-header">   
-      
-          <h2 class="section-title">FORMULÁRIO FDMP:</h2>
-          <span>MAPLE BEAR</span>
-        </div>
+
         <div class="row">
 
 
@@ -158,14 +167,26 @@
                             <div class="tipo-de-faturamento">
                                 <div class="tipo-de-faturamento-1">CPF:</div>
                                 <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Cargo:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.cargo }}</div>
                             </div>  
                             <div class="tipo-de-faturamento">
-                              <div class="tipo-de-faturamento-1 espacamento-formulario">Early Toddler - Quantidade de Alunos:</div>
-                              <div class="tipo-de-faturamento-1">{{ form.early_toddler_qtd }}</div>
+                              <div class="tipo-de-faturamento-1">UF:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.uf }}</div>
+                            </div>
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1">Cidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
+                            </div>      
+                            <div class="tipo-de-faturamento">
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Quantidade de Alunos:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.bear_care_qtd }}</div>
                           </div>
                           <div class="tipo-de-faturamento">
-                              <div class="tipo-de-faturamento-1 espacamento-formulario">Early Toddler - Valor Médio da Mensalidade:</div>
-                              <div class="tipo-de-faturamento-1">{{ form.early_toddler_vm }}</div>
+                              <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Valor Médio da Mensalidade:</div>
+                              <div class="tipo-de-faturamento-1">{{ form.bear_care_vm }}</div>
                           </div>
                           <div class="tipo-de-faturamento">
                             <div class="tipo-de-faturamento-1 espacamento-formulario">Toddler - Quantidade de Alunos:</div>
@@ -305,14 +326,25 @@
               <div class="login-button">
                   <button type="submit" class="btn btn-primary">Salvar</button>
               </div>
+              <br><br><h7 class="navbar-brand-ajuste">ATENÇÃO</h7>
+              <p class="ajuste-fonte">Caso tenha muitas duvidas para responder o formulario, entre em contato pelo link abaixo.</p>
+              <br><div class="navbar-brand-ajuste"><a href="https://wa.me/5511997762326/" class="btn btn-lg btn-common btn-effect" target="_blank"><i class="fa fa-whatsapp text-white text-lg ajuste-icon"></i>Clique Aqui</a></div>
+              
+              
+
 
           </div>
       </form>
 
+
         </div>
+
       </div>
+      
     </section>
+
     </div>
+
     <!-- Features Section End -->   
 
 

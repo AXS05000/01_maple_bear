@@ -139,7 +139,7 @@ class FDMPFormEdit(forms.ModelForm):
     class Meta:
         model = AvaliacaoFDMP
         fields = "__all__"
-        exclude = ('cnpj',) 
+        exclude = ('cnpj', 'razao_social',) 
 
     def clean_cpf(self):
         cpf_original = self.cleaned_data.get("cpf")

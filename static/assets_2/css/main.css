@@ -45,9 +45,24 @@ h1, h2, h3, h4, h5 {
   color: #263238;
 }
 
+
 h7 {
   font-family: 'Montserrat', sans-serif;
-  font-size: 26px;
+  font-size: 24px;
+  font-weight: 700;
+  color: #263238;
+}
+
+h11 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 25px;
+  font-weight: 700;
+  color: #263238;
+}
+
+h10 {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 20px;
   font-weight: 700;
   color: #263238;
 }
@@ -120,6 +135,20 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   align-items: center;
   justify-content: center;
 }
+
+.ajuste-icon {
+  padding-right: 1rem;
+}
+.ajuste-fonte {
+  font-size: 17px;
+  max-width: 600px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
 /* ==========================================================================
    2.1 Section Title
    ========================================================================== */
