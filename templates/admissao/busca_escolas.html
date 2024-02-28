@@ -111,6 +111,7 @@
                 <th scope="col">CNPJ</th>
                 <th scope="col">Nome</th>
                 <th scope="col">CPF</th>
+                <th scope="col">Cargo</th>
                 <th scope="col">Editar</th>
               </tr>
             </thead>
@@ -125,6 +126,9 @@
                   </td>
                   <td>
                     <p>{{ contrato.cpf }}</p>
+                  </td>
+                  <td>
+                    <p>{{ contrato.cargo }}</p>
                   </td>
                   <td>
                     <a href="{% url 'form_fdmp_edit' contrato.id %}">
