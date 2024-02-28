@@ -32,7 +32,10 @@
     <!-- Header Section Start -->
     <header id="slider-area">  
       <nav class="navbar navbar-expand-md fixed-top scrolling-navbar bg-white">
-        <div class="container">  
+        <div class="container">
+          {% if user.is_anonymous %}
+          <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
+          {% else %}  
           <a class="navbar-brand" href="{% url 'index' %}"><img  src="{% static 'assets_2/img/maple_bear.svg' %}" alt="" style="max-height: 40px;">  Maple Bear</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
             <i class="lni-menu"></i>
@@ -57,8 +60,7 @@
                   <a class="nav-link" href="{% url 'form_fdmp' %}">Formulário FDMP</a>
                 </div>
               </li>
-              {% if user.is_anonymous %}
-              {% else %}
+
               <li class="nav-item">
                 <a class="nav-link page-scroll" href="{% url 'logout' %}">Sair</a>
               </li>

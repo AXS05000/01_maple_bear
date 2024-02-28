@@ -99,7 +99,7 @@ def upload_template(request):
     #     return super().form_invalid(form)
 
 
-@method_decorator(login_required(login_url="/login/"), name="dispatch")
+
 class FormCandidatoCreateView(CreateView):
     model = Contrato
     form_class = AdmissaoForm
@@ -344,12 +344,12 @@ class FormFDMPFormCreateView(CreateView):
 
 
 
-@method_decorator(login_required(login_url="/login/"), name="dispatch")
+
 class FormFDMPUpdateView(UpdateView):
     model = AvaliacaoFDMP
     form_class = FDMPFormEdit
     template_name = "admissao/formulario_fdmp_edit.html"
-    success_url = reverse_lazy("busca_escolas")
+    success_url = reverse_lazy("form_fdmp_edit")
 
     def form_valid(self, form):
         if 'cnpj' in form.changed_data:

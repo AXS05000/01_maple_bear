@@ -111,6 +111,11 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   min-width: 500px;
 }
 
+.navbar-brand-ajuste {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 /* ==========================================================================
    2.1 Section Title
    ========================================================================== */
