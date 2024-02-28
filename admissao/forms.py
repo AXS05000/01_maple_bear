@@ -167,3 +167,15 @@ class FDMPFormEdit(forms.ModelForm):
         if numbers[10] != expected_digit:
             return False
         return True
+
+class CNPJForm(forms.Form):
+    cnpj = forms.CharField(max_length=18)
+
+    widgets = {
+            "cnpj": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "CNPJ",
+                }
+            ),
+        }

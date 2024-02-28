@@ -1,10 +1,11 @@
 from django.urls import path
 
 from . import views
-from .views import ContratoSearchView, FormCandidatoCreateView, CandidatoUpdateView, FormFDMPFormCreateView, EscolasSearchView, FormFDMPUpdateView, ExcelImportView
+from .views import ContratoSearchView, FormCandidatoCreateView, CandidatoUpdateView, FormFDMPFormCreateView, EscolasSearchView, FormFDMPUpdateView, ExcelImportView, CNPJSearchView
 
 urlpatterns = [
     path("upload_template/", views.upload_template, name="upload_template"),
+    path('fdmp/', CNPJSearchView.as_view(), name='buscar_cnpj'),
     path("form_fdmp/", FormFDMPFormCreateView.as_view(), name="form_fdmp"),
     path("form_fdmp_edit/<int:pk>/", FormFDMPUpdateView.as_view(), name="form_fdmp_edit"),
     path("busca_escolas/", EscolasSearchView.as_view(), name="busca_escolas"),

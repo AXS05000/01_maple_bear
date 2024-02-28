@@ -1,12 +1,12 @@
 import os
 import openpyxl
 from django.conf import settings
-from django.shortcuts import get_object_or_404, render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView
 from .models import Contrato, Templates, AvaliacaoFDMP
 from django.db.models import Q
-from .forms import UploadFileForm, AdmissaoForm, FDMPForm, FDMPFormEdit
+from .forms import UploadFileForm, AdmissaoForm, FDMPForm, FDMPFormEdit, CNPJForm
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 from django.urls import reverse_lazy
@@ -409,6 +409,19 @@ class EscolasSearchView(ListView):
         return AvaliacaoFDMP.objects.all().order_by(order_by)
     
 
+class CNPJSearchView(View):
+    def get(self, request):
+        form = CNPJForm()
+        return render(request, 'cnpj_search.html', {'form': form})
+
+    def post(self, request):
+        form = CNPJForm(request.POST)
+        if form.is_valid():
+            cnpj = form.cleaned_data['cnpj']
+            avaliacao = get_object_or_404(AvaliacaoFDMP, cnpj=cnpj)
+            return redirect('form_fdmp_edit', pk=avaliacao.pk)
+        return render(request, 'cnpj_search.html', {'form': form})
+
 
 #################################### IMPORTAÇÃO EXCEL ###############################################
 
@@ -433,3 +446,5 @@ class ExcelImportView(View):
                 AvaliacaoFDMP.objects.create(cnpj=cnpj)
         
         return HttpResponse("Importação realizada com sucesso!")
+    
+
