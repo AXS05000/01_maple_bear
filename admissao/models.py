@@ -232,6 +232,7 @@ class AvaliacaoFDMP(Base):
     year_11_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
     year_12_qtd = models.IntegerField(null=True, blank=True, default=0)
     year_12_vm = models.DecimalField(max_digits=25, decimal_places=2, null=True, blank=True, default=0)
+    bloqueado_para_edicao = models.BooleanField(default=False, verbose_name="Bloqueado para Edição")
 
     def __str__(self):
         return f"{self.nome}"

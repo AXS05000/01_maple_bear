@@ -351,6 +351,12 @@ class FormFDMPUpdateView(UpdateView):
     form_class = FDMPFormEdit
     template_name = "admissao/formulario_fdmp_edit.html"
 
+    def dispatch(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        if self.object.bloqueado_para_edicao:
+            return HttpResponse("Este formulário já foi enviado e está bloqueado para edição.", status=403)
+        return super().dispatch(request, *args, **kwargs)
+
     def form_valid(self, form):
         self.object = form.save()
         if 'cnpj' in form.changed_data:
