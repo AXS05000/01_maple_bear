@@ -135,11 +135,27 @@ class FDMPForm(forms.ModelForm):
     
 
 
+
+class CNPJForm(forms.Form):
+    cnpj = forms.CharField(max_length=18)
+
+    widgets = {
+            "cnpj": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "CNPJ",
+                }
+            ),
+        }
+    
+
+
+
 class FDMPFormEdit(forms.ModelForm):
     class Meta:
         model = AvaliacaoFDMP
         fields = "__all__"
-        exclude = ('cnpj', 'razao_social', 'bloqueado_para_edicao') 
+        exclude = ('cnpj', 'razao_social', 'bloqueado_para_edicao')
 
     def clean_cpf(self):
         cpf_original = self.cleaned_data.get("cpf")
@@ -168,14 +184,43 @@ class FDMPFormEdit(forms.ModelForm):
             return False
         return True
 
-class CNPJForm(forms.Form):
-    cnpj = forms.CharField(max_length=18)
+    def clean(self):
+        cleaned_data = super().clean()
 
-    widgets = {
-            "cnpj": forms.TextInput(
-                attrs={
-                    "class": "form-control",
-                    "placeholder": "CNPJ",
-                }
-            ),
-        }
+        pairs = [
+            ('bear_care_qtd', 'bear_care_vm'),
+            ('toddler_qtd', 'toddler_vm'),
+            ('nursery_qtd', 'nursery_vm'),
+            ('junior_kindergarten_qtd', 'junior_kindergarten_vm'),
+            ('senior_kindergarten_qtd', 'senior_kindergarten_vm'),
+            ('year_1_qtd', 'year_1_vm'),
+            ('year_2_qtd', 'year_2_vm'),
+            ('year_3_qtd', 'year_3_vm'),
+            ('year_4_qtd', 'year_4_vm'),
+            ('year_5_qtd', 'year_5_vm'),
+            ('year_6_qtd', 'year_6_vm'),
+            ('year_7_qtd', 'year_7_vm'),
+            ('year_8_qtd', 'year_8_vm'),
+            ('year_9_qtd', 'year_9_vm'),
+            ('year_10_qtd', 'year_10_vm'),
+            ('year_11_qtd', 'year_11_vm'),
+            ('year_12_qtd', 'year_12_vm'),
+        ]
+
+        for qtd_field, vm_field in pairs:
+            qtd = cleaned_data.get(qtd_field)
+            vm = cleaned_data.get(vm_field)
+
+            # Verifica se o valor médio está preenchido enquanto a quantidade é zero
+            if vm and vm != 0 and (qtd is None or qtd == 0):
+                self.add_error(qtd_field, ValidationError(
+                    "Este campo não pode ser zero se o valor médio da mensalidade for diferente de zero."
+                ))
+
+            # Verifica se a quantidade está preenchida enquanto o valor médio é zero
+            if qtd and qtd != 0 and (vm is None or vm == 0):
+                self.add_error(vm_field, ValidationError(
+                    "Este campo não pode ser zero se a quantidade de alunos for diferente de zero."
+                ))
+
+        return cleaned_data
