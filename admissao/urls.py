@@ -1,7 +1,10 @@
-from django.urls import path
-
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
-from .views import ContratoSearchView, FormCandidatoCreateView, CandidatoUpdateView, FormFDMPFormCreateView, EscolasSearchView, FormFDMPUpdateView, ExcelImportView, CNPJSearchView
+from .views import ContratoSearchView, AvaliacaoFDMPViewSet, FormCandidatoCreateView, CandidatoUpdateView, FormFDMPFormCreateView, EscolasSearchView, FormFDMPUpdateView, ExcelImportView, CNPJSearchView
+
+router = DefaultRouter()
+router.register(r'avaliacoes', AvaliacaoFDMPViewSet)
 
 urlpatterns = [
     path("upload_template/", views.upload_template, name="upload_template"),
@@ -14,4 +17,5 @@ urlpatterns = [
     path("busca_candidato/", ContratoSearchView.as_view(), name="busca_candidato"),
     path("candidato_edit/<int:pk>/", CandidatoUpdateView.as_view(), name="candidato_edit"),
     path("editar/<int:pk>/", views.select_contract_id, name="edit_candidato"),
+    path('', include(router.urls)),
 ]
