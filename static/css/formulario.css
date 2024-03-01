@@ -407,13 +407,21 @@
 @media screen and (max-width: 1330px) {
 
   .input-box input {
-    width: 35rem; /* Altera a largura do input para 70% da largura do container pai */
+    width: 15rem; /* Altera a largura do input para 70% da largura do container pai */
 
 }
 
-  .select select {
-    width: 35rem; /* Altera a largura do select para 70% da largura do container pai */
+.select select {
+  width: 15rem;
+  min-width: 1rem; /* Altera a largura do select para 70% da largura do container pai */
 
+}
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 }
@@ -421,26 +429,37 @@
 @media screen and (max-width: 1064px) {
 
   .input-box input {
-    width: 23rem; /* Altera a largura do input para 70% da largura do container pai */
+    width: 15rem; /* Altera a largura do input para 70% da largura do container pai */
 
 }
 
   .select select {
-    width: 23rem; /* Altera a largura do select para 70% da largura do container pai */
+    width: 15rem;
+    min-width: 1rem; /* Altera a largura do select para 70% da largura do container pai */
 
 }
+
+.input-box {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 0.1rem;
+  min-height: 1rem;
+  min-width: 1rem;
+}
+
+
 
 }
 
 @media screen and (max-width: 280px) {
 
   .input-box input {
-    width: 15rem; /* Altera a largura do input para 70% da largura do container pai */
+    width: 10rem; /* Altera a largura do input para 70% da largura do container pai */
 
 }
 
   .select select {
-    width: 15rem; /* Altera a largura do select para 70% da largura do container pai */
+    width: 10rem; /* Altera a largura do select para 70% da largura do container pai */
 
 }
 

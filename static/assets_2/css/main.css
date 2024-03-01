@@ -126,6 +126,18 @@ a:not([href]):not([tabindex]):focus, a:not([href]):not([tabindex]):hover {
   min-width: 500px;
 }
 
+@media screen and (max-width: 1064px) {
+
+
+  .espacamento-formulario {
+    min-width: 200px;
+
+  }
+
+
+}
+
+
 .espacamento-tabela {
   max-width: 300px;
 }
