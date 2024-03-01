@@ -222,5 +222,9 @@ class FDMPFormEdit(forms.ModelForm):
                 self.add_error(vm_field, ValidationError(
                     "Este campo não pode ser zero se a quantidade de alunos for diferente de zero."
                 ))
+                
+            if qtd and vm and qtd == vm:
+                self.add_error(qtd_field, "A quantidade de alunos e o valor médio da mensalidade não podem ser iguais.")
+                self.add_error(vm_field, "A quantidade de alunos e o valor médio da mensalidade não podem ser iguais.")
 
         return cleaned_data
