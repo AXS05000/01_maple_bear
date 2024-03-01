@@ -22,6 +22,7 @@ from django.views.generic import View
 from rest_framework import viewsets
 from .models import AvaliacaoFDMP
 from .serializers import AvaliacaoFDMPSerializer
+from rest_framework.permissions import IsAuthenticated
 
 @method_decorator(login_required(login_url="/login/"), name="dispatch")
 class ContratoSearchView(ListView):
@@ -469,6 +470,9 @@ class ExcelImportView(View):
     
 #################################### CONFIGURAÇÃO API ###############################################
 
+
+
 class AvaliacaoFDMPViewSet(viewsets.ModelViewSet):
     queryset = AvaliacaoFDMP.objects.all()
     serializer_class = AvaliacaoFDMPSerializer
+    permission_classes = [IsAuthenticated]
