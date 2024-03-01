@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "usuarios",
     'rest_framework',
     'rest_framework_simplejwt',
+    'corsheaders',
 ]
 
 REST_FRAMEWORK = {
@@ -60,6 +61,7 @@ SIMPLE_JWT = {
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    'corsheaders.middleware.CorsMiddleware',
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -89,6 +91,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "projeto_maple.wsgi.application"
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 
 # Database
