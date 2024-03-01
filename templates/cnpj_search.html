@@ -72,7 +72,7 @@
                   {% endif %}
                   <div class="input-group input-group-outline my-3">
                     <label for="username" class="form-label">CNPJ</label>
-                    <input id="cnpj" name="cnpj" class="form-control" placeholder="" required autofocus>
+                    <input type="text" id="cnpj" name="cnpj" class="form-control" maxlength="18" placeholder="" required autofocus>
                   </div>
                   <div class="text-center">
                     <input class="btn bg-gradient-primary w-100 my-4 mb-2" type="submit" value="Entrar">
@@ -109,6 +109,42 @@
       document.getElementById("error-message").style.display = "none";
     });
   </script>
+  <script>
+    function formatarCNPJ(cnpj) {
+      // Remove caracteres indesejados
+      cnpj = cnpj.replace(/\D/g, '');
+    
+      // Limita o tamanho do CNPJ a 14 caracteres
+      cnpj = cnpj.substring(0, 14);
+    
+      // Adiciona os pontos, barra e traço da máscara
+      if (cnpj.length >= 3 && cnpj.length <= 5) {
+        cnpj = cnpj.replace(/^(\d{2})(\d)/, "$1.$2");
+      } else if (cnpj.length >= 6 && cnpj.length <= 8) {
+        cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d)/, "$1.$2.$3");
+      } else if (cnpj.length >= 9 && cnpj.length <= 12) {
+        cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d)/, "$1.$2.$3/$4");
+      } else if (cnpj.length > 12) {
+        cnpj = cnpj.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d)/, "$1.$2.$3/$4-$5");
+      }
+    
+      return cnpj;
+    }
+    
+    document.getElementById('cnpj').addEventListener('input', function() {
+      this.value = formatarCNPJ(this.value);
+    });
+    
+    document.getElementById('cnpj').addEventListener('keydown', function(event) {
+      if (event.key === "Backspace" && this.value.length > 0) {
+        // Impede a função padrão do backspace (apagar o último caractere)
+        event.preventDefault();
+        var value = this.value.replace(/\D/g, '');
+        this.value = formatarCNPJ(value.substring(0, value.length - 1));
+      }
+    });
+    </script>
+  
 </body>
 
 </html>
