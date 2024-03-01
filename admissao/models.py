@@ -195,7 +195,7 @@ class AvaliacaoFDMP(Base):
     razao_social = models.CharField(max_length=200)
     nome = models.CharField(max_length=200)
     cpf = models.CharField(max_length=14)
-    cargo = models.CharField(max_length=200)
+    cargo = models.CharField(max_length=200, null=True, blank=True)
     uf = models.CharField(max_length=2, choices=STATE_CHOICES)
     cidade = models.CharField(max_length=100)
     bear_care_qtd = models.IntegerField(null=True, blank=True, default=0)

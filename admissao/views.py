@@ -345,7 +345,6 @@ class FormFDMPFormCreateView(CreateView):
 
 
 
-
 class FormFDMPUpdateView(UpdateView):
     model = AvaliacaoFDMP
     form_class = FDMPFormEdit
@@ -358,12 +357,17 @@ class FormFDMPUpdateView(UpdateView):
         return super().dispatch(request, *args, **kwargs)
 
     def form_valid(self, form):
-        self.object = form.save()
+        # Isso irá atualizar o objeto com os dados do formulário.
+        self.object = form.save(commit=False)
         if 'cnpj' in form.changed_data:
             self.object.cnpj = AvaliacaoFDMP.objects.get(pk=self.object.pk).cnpj
-            self.object.save()
-        # Retorna uma resposta HTTP simples com uma mensagem de sucesso
-        return HttpResponse("Formulário enviado com sucesso!", status=200)
+
+        # Aqui você define o objeto como bloqueado para edição futura.
+        self.object.bloqueado_para_edicao = True
+        self.object.save()  # Não esqueça de salvar as alterações.
+
+        # Você pode usar `HttpResponseRedirect` para redirecionar para um URL de sucesso.
+        return HttpResponseRedirect(self.get_success_url())
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():
@@ -373,6 +377,10 @@ class FormFDMPUpdateView(UpdateView):
                 )
         return super().form_invalid(form)
 
+    def get_success_url(self):
+        # Defina a URL para onde você deseja redirecionar após o sucesso.
+        # Por exemplo, para a página de busca de escolas:
+        return reverse_lazy('busca_escolas')
 
 
 
