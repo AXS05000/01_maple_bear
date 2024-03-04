@@ -157,6 +157,29 @@ class FDMPFormEdit(forms.ModelForm):
         fields = "__all__"
         exclude = ('cnpj', 'razao_social', 'bloqueado_para_edicao')
 
+        widgets = {
+            "nome": forms.TextInput(
+                attrs={
+                    "placeholder": "Exemplo: Eduardo Silva de Souza",
+                }
+            ),
+            "cpf": forms.TextInput(
+                attrs={
+                    "placeholder": "Exemplo: 123.456.789-11",
+                }
+            ),
+            "cargo": forms.TextInput(
+                attrs={
+                    "placeholder": "Exemplo: CEO",
+                }
+            ),
+            "cidade": forms.TextInput(
+                attrs={
+                    "placeholder": "Exemplo: São Paulo",
+                }
+            ),
+        }
+
     def clean_cpf(self):
         cpf_original = self.cleaned_data.get("cpf")
         # Remove pontos e traço para validar apenas os dígitos
