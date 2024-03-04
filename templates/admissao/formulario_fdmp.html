@@ -132,165 +132,184 @@
               <div class="input-group">
                   <div class="input-box">
                       <div class="select">
-                          <div id="camposAdicionais" class="select produto-quantidade">
-                            <div class="form-contratos">
-                              <div class="comp-nota-1">CNPJ:</div>
-                              <div class="comp-nota-1">{{ form.cnpj }}</div>
-                            </div>
-                            <div class="form-contratos">
-                                <div class="comp-nota-1">Nome:</div>
-                                <div class="comp-nota-1">{{ form.nome }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento">
-                                <div class="tipo-de-faturamento-1">CPF:</div>
-                                <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
-                            </div>
-                            <div class="tipo-de-faturamento">
-                              <div class="tipo-de-faturamento-1">Early Toddler - <br>Quantidade de Alunos:</div>
-                              <div class="tipo-de-faturamento-1">{{ form.early_toddler_qtd }}</div>
+                        <div class="input-group container">
+                          <div class="input-box ">
+                              <div class="select">
+                                  <div id="camposAdicionais" class="select produto-quantidade">
+                                    <div class="form-contratos">
+                                      <div class="comp-nota-1">CNPJ:</div>
+                                      <div class="comp-nota-1">{{ form.cnpj }}</div>
+                                    </div>
+                                    <div class="form-contratos">
+                                      <div class="comp-nota-1">Razão Social:</div>
+                                      <div class="comp-nota-1">{{ form.razao_social }}</div>
+                                    </div>
+                                    <div class="form-contratos">
+                                        <div class="comp-nota-1">Nome:</div>
+                                        <div class="comp-nota-1">{{ form.nome }}</div>
+                                    </div>
+                                    <div class="tipo-de-faturamento">
+                                        <div class="tipo-de-faturamento-1">CPF:</div>
+                                        <div class="tipo-de-faturamento-1">{{ form.cpf|addattrs:"id=cpf" }}</div>
+                                    </div>
+                                    <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1">Cargo:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.cargo }}</div>
+                                    </div>  
+                                    <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1">UF:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.uf }}</div>
+                                    </div>
+                                    <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1">Cidade:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.cidade }}</div>
+                                    </div>      
+                                    <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Quantidade de Alunos:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.bear_care_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1 espacamento-formulario">Bear Care - Valor Médio da Mensalidade:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.bear_care_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Toddler - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.toddler_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                      <div class="tipo-de-faturamento-1 espacamento-formulario">Toddler - Valor Médio da Mensalidade:</div>
+                                      <div class="tipo-de-faturamento-1">{{ form.toddler_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Nursery - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.nursery_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Nursery - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.nursery_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Junior Kindergarten - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Junior Kindergarten - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Senior Kindergarten - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Senior Kindergarten - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 1 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_1_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 1 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_1_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 2 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_2_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 2 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_2_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 3 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_3_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 3 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_3_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 4 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_4_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 4 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_4_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 5 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_5_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 5 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_5_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 6 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_6_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 6 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_6_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 7 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_7_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 7 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_7_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 8 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_8_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 8 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_8_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 9 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_9_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 9 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_9_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 10 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_10_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 10 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_10_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 11 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_11_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 11 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_11_vm }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 12 - Quantidade de Alunos:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_12_qtd }}</div>
+                                  </div>
+                                  <div class="tipo-de-faturamento">
+                                    <div class="tipo-de-faturamento-1 espacamento-formulario">Year 12 - Valor Médio da Mensalidade:</div>
+                                    <div class="tipo-de-faturamento-1">{{ form.year_12_vm }}</div>
+                                  </div>
+        
+                                  </div>
+        
+        
+                              </div>
                           </div>
-                          <div class="tipo-de-faturamento">
-                              <div class="tipo-de-faturamento-1">Early Toddler - <br>Valor Médio da Mensalidade:</div>
-                              <div class="tipo-de-faturamento-1">{{ form.early_toddler_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Toddler - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.toddler_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                              <div class="tipo-de-faturamento-1">Toddler - <br>Valor Médio da Mensalidade:</div>
-                              <div class="tipo-de-faturamento-1">{{ form.toddler_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Nursery - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.nursery_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Nursery - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.nursery_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Junior Kindergarten - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Junior Kindergarten - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.junior_kindergarten_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Senior Kindergarten - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Senior Kindergarten - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.senior_kindergarten_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 1 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_1_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 1 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_1_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 2 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_2_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 2 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_2_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 3 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_3_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 3 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_3_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 4 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_4_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 4 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_4_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 5 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_5_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 5 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_5_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 6 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_6_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 6 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_6_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 7 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_7_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 7 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_7_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 8 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_8_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 8 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_8_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 9 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_9_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 9 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_9_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 10 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_10_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 10 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_10_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 11 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_11_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 11 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_11_vm }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 12 - <br>Quantidade de Alunos:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_12_qtd }}</div>
-                          </div>
-                          <div class="tipo-de-faturamento">
-                            <div class="tipo-de-faturamento-1">Year 12 - <br>Valor Médio da Mensalidade:</div>
-                            <div class="tipo-de-faturamento-1">{{ form.year_12_vm }}</div>
-                          </div>
-
-                          </div>
-
-
                       </div>
-                  </div>
-              </div>
-              <div class="login-button">
-                  <button type="submit" class="btn btn-primary">Cadastrar</button>
-              </div>
+                      <div class="login-button">
+                          <button type="submit" class="btn btn-primary">Salvar</button>
+                      </div>
 
           </div>
       </form>
