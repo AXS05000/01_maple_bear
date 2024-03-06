@@ -371,7 +371,7 @@ class FormFDMPUpdateView(UpdateView):
         self.object.save()  # Não esqueça de salvar as alterações.
 
         # Você pode usar `HttpResponseRedirect` para redirecionar para um URL de sucesso.
-        return HttpResponseRedirect(self.get_success_url())
+        return HttpResponse("Formulário enviado.", status=200)
 
     def form_invalid(self, form):
         for field, errors in form.errors.items():
